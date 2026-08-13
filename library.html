@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06152f"><meta name="mathsera-version" content="search-fix-v2">
+<title>Learning Library | MathsEra Classes</title>
+<meta name="description" content="MathsEra Classes Learning Library — Search Class, Board, Chapter, Subject and Solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<style>
+.library-page{padding:45px 0 80px}.library-card{background:#fff;border-radius:22px;padding:24px;box-shadow:0 10px 35px rgba(6,21,47,.08);border:1px solid #e8edf5}.library-title{margin:0 0 10px;font-size:clamp(32px,5vw,48px)}.library-desc{color:#667085;max-width:760px;line-height:1.7}.filter-box{margin-top:25px;padding:18px;border-radius:18px;background:#f5f8fc;border:1px solid #e5eaf2}.filter-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.filter-grid input,.filter-grid select{width:100%;box-sizing:border-box;padding:13px 14px;border-radius:12px;border:1px solid #d9e0ea;background:#fff;font:inherit;outline:none}.filter-grid input:focus,.filter-grid select:focus{border-color:#1683ff;box-shadow:0 0 0 3px rgba(22,131,255,.12)}.filter-actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}.filter-actions button{border:0;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer}.apply-btn{background:#1683ff;color:#fff}.clear-btn{background:#e8edf5;color:#10203b}.results-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:28px 0 15px}.results-head h2{margin:0}.result-count{color:#4675b8;font-weight:700}.results-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.resource-card{background:#fff;border:1px solid #e6ebf2;border-radius:20px;overflow:hidden;box-shadow:0 7px 25px rgba(6,21,47,.06);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}.resource-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(6,21,47,.12)}.resource-image{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#eef3f8}.resource-content{padding:20px}.resource-type{color:#3774c5;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.resource-content h3{margin:8px 0 12px;font-size:21px;line-height:1.35}.tags{display:flex;flex-wrap:wrap;gap:7px}.tag{background:#edf4ff;color:#244c82;padding:6px 9px;border-radius:999px;font-size:12px;font-weight:600}.resource-body{color:#687384;line-height:1.6;margin-top:12px}.open-resource{margin-top:15px;color:#1683ff;font-weight:800;font-size:13px}.no-results{background:#fff;border:1px solid #e6ebf2;border-radius:18px;padding:35px;text-align:center;color:#667085;grid-column:1/-1}.loading{padding:35px;text-align:center;color:#667085;grid-column:1/-1}.error-box{background:#fff0f0;color:#a52b2b;border:1px solid #ffd0d0;border-radius:15px;padding:18px;grid-column:1/-1}@media(max-width:900px){.filter-grid{grid-template-columns:repeat(2,1fr)}.results-grid{grid-template-columns:1fr}}@media(max-width:600px){.library-page{padding:25px 0 60px}.filter-grid{grid-template-columns:1fr}.library-card{padding:18px}.results-head{align-items:flex-start;flex-direction:column}.resource-content{padding:16px}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="container nav"><a class="brand" href="index.html"><img src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png" alt="MathsEra Classes"><span><b>MathsEra Classes</b><small>Building Strong Foundations for Success</small></span></a><nav class="desktop-nav"><a href="index.html">Home</a><a href="index.html#mathematics">Mathematics</a><a href="index.html#school">School</a><a href="index.html#exams">Exams</a><a href="admin.html" class="admin-link">🔐 Admin</a></nav><button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button></div><div class="mobile-nav" id="mobileNav"><a href="index.html">🏠 Home</a><a href="index.html#mathematics">📐 Mathematics</a><a href="index.html#school">🏫 School Learning</a><a href="index.html#exams">🎯 Exams</a><a href="admin.html">🔐 Admin Login</a></div></header>
+<main class="library-page"><div class="container"><div class="library-card"><div class="eyebrow blue">MATHSERA LEARNING LIBRARY</div><h1 class="library-title">Learning Library</h1><p class="library-desc">Search and explore MathsEra Classes notes, solutions, diagrams, images and other learning resources.</p>
+<div class="filter-box"><div class="filter-grid"><input id="searchInput" type="search" placeholder="🔎 Search question, chapter, topic..."><select id="classFilter"><option value="">All Classes</option></select><select id="boardFilter"><option value="">All Boards</option></select><select id="categoryFilter"><option value="">All Subjects / Categories</option></select><select id="chapterFilter"><option value="">All Chapters</option></select></div><div class="filter-grid" style="margin-top:12px"><select id="typeFilter"><option value="">All Content Types</option></select></div><div class="filter-actions"><button class="apply-btn" id="searchBtn" type="button">SEARCH</button><button class="clear-btn" id="clearBtn" type="button">CLEAR FILTERS</button></div></div>
+<div class="results-head"><h2>Available Resources</h2><div class="result-count" id="resultCount">Loading...</div></div><div id="results" class="results-grid"><div class="loading">Loading MathsEra resources...</div></div>
+</div></div></main>
+<footer><div class="container copyright">© <span id="year"></span> MathsEra Classes. All rights reserved.</div></footer>
+<script>
+const menuBtn=document.getElementById('menuBtn'),mobileNav=document.getElementById('mobileNav');if(menuBtn&&mobileNav)menuBtn.addEventListener('click',()=>mobileNav.classList.toggle('open'));document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>mobileNav.classList.remove('open')));document.getElementById('year').textContent=new Date().getFullYear();
+let client=null;try{if(window.MATHSERA_SUPABASE_URL&&window.MATHSERA_SUPABASE_PUBLISHABLE_KEY)client=supabase.createClient(window.MATHSERA_SUPABASE_URL,window.MATHSERA_SUPABASE_PUBLISHABLE_KEY)}catch(e){console.error(e)}
+const results=document.getElementById('results'),resultCount=document.getElementById('resultCount'),searchInput=document.getElementById('searchInput'),classFilter=document.getElementById('classFilter'),boardFilter=document.getElementById('boardFilter'),categoryFilter=document.getElementById('categoryFilter'),chapterFilter=document.getElementById('chapterFilter'),typeFilter=document.getElementById('typeFilter');let allResources=[];
+function escapeHtml(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
+function uniqueValues(rows,key){return [...new Set(rows.map(r=>String(r[key]??'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}))}
+function fillSelect(select,values){const first=select.options[0]?.textContent||'';select.innerHTML=`<option value="">${escapeHtml(first)}</option>`;values.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;select.appendChild(o)})}
+async function loadResources(){results.innerHTML='<div class="loading">Loading MathsEra resources...</div>';resultCount.textContent='Loading...';if(!client){results.innerHTML='<div class="error-box"><b>Supabase connection failed.</b><br><br>Please check <b>supabase-config.js</b>.</div>';resultCount.textContent='Error';return}try{const {data,error}=await client.from('resources').select('id,title,category,class_name,board,subject,chapter,exercise,question_number,content_type,body,image_url,published,created_at').eq('published',true).order('created_at',{ascending:false});if(error)throw error;allResources=data||[];fillSelect(classFilter,uniqueValues(allResources,'class_name'));fillSelect(boardFilter,uniqueValues(allResources,'board'));fillSelect(categoryFilter,uniqueValues(allResources,'category'));fillSelect(chapterFilter,uniqueValues(allResources,'chapter'));fillSelect(typeFilter,uniqueValues(allResources,'content_type'));const p=new URLSearchParams(location.search);const q=p.get('q')||'',category=p.get('category')||'',subject=p.get('subject')||'',exam=p.get('exam')||'';if(q)searchInput.value=q;if(category||subject){const wanted=(category||subject).toLowerCase();const o=[...categoryFilter.options].find(x=>x.value.toLowerCase()===wanted);if(o)categoryFilter.value=o.value}if(exam)searchInput.value=exam;renderResources()}catch(e){console.error(e);results.innerHTML=`<div class="error-box"><b>Library loading failed.</b><br><br>${escapeHtml(e.message||'Unknown Supabase error')}</div>`;resultCount.textContent='Error'}}
+function normalizeSearch(value){
+  return String(value ?? '')
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function searchMatches(resource, query){
+  const q = normalizeSearch(query);
+  if (!q) return true;
+
+  // Search across every useful resource field, including the dedicated
+  // exercise/question columns used by the database schema.
+  const searchable = normalizeSearch([
+    resource.title,
+    resource.category,
+    resource.class_name,
+    resource.board,
+    resource.subject,
+    resource.chapter,
+    resource.exercise,
+    resource.question_number,
+    resource.content_type,
+    resource.body
+  ].filter(v => v !== null && v !== undefined && String(v).trim() !== '').join(' '));
+
+  // Exact normalized phrase first.
+  if (searchable.includes(q)) return true;
+
+  // Then require every meaningful word. This makes punctuation such as
+  // "Exercise 4.3 Question 5" independent of how it is stored.
+  const words = q.split(' ').filter(w => w.length > 0);
+  if (words.length && words.every(word => searchable.includes(word))) return true;
+
+  // Friendly support for common searches like:
+  // "Exercise 4.3 Question 5", "Question 5", or "Q5".
+  const exerciseMatch = q.match(/(?:exercise|ex)\s*(\d+(?:\s+\d+)?)/i);
+  const questionMatch = q.match(/(?:question|ques|q)\s*(\d+)/i);
+
+  if (exerciseMatch) {
+    const ex = normalizeSearch(exerciseMatch[1]).replace(/\s+/g, ' ').trim();
+    const storedEx = normalizeSearch(resource.exercise);
+    if (storedEx && (storedEx === ex || storedEx.includes(ex) || ex.includes(storedEx))) {
+      if (!questionMatch) return true;
+      const qn = normalizeSearch(questionMatch[1]);
+      const storedQ = normalizeSearch(resource.question_number);
+      if (storedQ && (storedQ === qn || storedQ === `q ${qn}`)) return true;
+      // If dedicated fields are empty, the title/body word matching above
+      // remains the fallback.
+    }
+  }
+
+  if (questionMatch) {
+    const qn = normalizeSearch(questionMatch[1]);
+    const storedQ = normalizeSearch(resource.question_number);
+    if (storedQ && (storedQ === qn || storedQ === `q ${qn}`)) return true;
+  }
+
+  return false;
+}
+
+function getFilteredResources(){
+  const search=searchInput.value.trim(),
+    cls=classFilter.value.trim().toLowerCase(),
+    board=boardFilter.value.trim().toLowerCase(),
+    category=categoryFilter.value.trim().toLowerCase(),
+    chapter=chapterFilter.value.trim().toLowerCase(),
+    type=typeFilter.value.trim().toLowerCase();
+
+  return allResources.filter(r=>{
+    if(!searchMatches(r,search)) return false;
+    if(cls&&String(r.class_name||'').trim().toLowerCase()!==cls) return false;
+    if(board&&String(r.board||'').trim().toLowerCase()!==board) return false;
+    if(category&&String(r.category||'').trim().toLowerCase()!==category) return false;
+    if(chapter&&String(r.chapter||'').trim().toLowerCase()!==chapter) return false;
+    if(type&&String(r.content_type||'').trim().toLowerCase()!==type) return false;
+    return true;
+  });
+}
+function renderResources(){const filtered=getFilteredResources();resultCount.textContent=`${filtered.length} ${filtered.length===1?'resource':'resources'}`;if(!filtered.length){results.innerHTML='<div class="no-results"><div style="font-size:40px">🔎</div><h3>No resources found</h3><p>Try another search or clear the filters.</p></div>';return}results.innerHTML=filtered.map(r=>{const bodyText=String(r.body||'');const image=r.image_url?`<img class="resource-image" src="${escapeHtml(r.image_url)}" alt="${escapeHtml(r.title||'MathsEra Solution')}" loading="lazy">`:'';return `<article class="resource-card" data-resource-id="${escapeHtml(r.id)}" tabindex="0" role="link" aria-label="Open ${escapeHtml(r.title||'MathsEra Resource')}">${image}<div class="resource-content"><div class="resource-type">${escapeHtml(r.content_type||'Resource')}</div><h3>${escapeHtml(r.title||'MathsEra Resource')}</h3><div class="tags">${r.category?`<span class="tag">${escapeHtml(r.category)}</span>`:''}${r.class_name?`<span class="tag">Class ${escapeHtml(r.class_name)}</span>`:''}${r.board?`<span class="tag">${escapeHtml(r.board)}</span>`:''}${r.chapter?`<span class="tag">${escapeHtml(r.chapter)}</span>`:''}</div>${bodyText?`<div class="resource-body">${escapeHtml(bodyText.substring(0,220))}${bodyText.length>220?'...':''}</div>`:''}<div class="open-resource">View full resource →</div></div></article>`}).join('')}
+function openResource(id){if(id)window.location.href=`resource.html?id=${encodeURIComponent(id)}`}
+results.addEventListener('click',e=>{const card=e.target.closest('.resource-card');if(card)openResource(card.dataset.resourceId)});results.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const card=e.target.closest('.resource-card');if(card){e.preventDefault();openResource(card.dataset.resourceId)}}});
+document.getElementById('searchBtn').addEventListener('click',renderResources);searchInput.addEventListener('input',renderResources);[classFilter,boardFilter,categoryFilter,chapterFilter,typeFilter].forEach(el=>el.addEventListener('change',renderResources));document.getElementById('clearBtn').addEventListener('click',()=>{[searchInput,classFilter,boardFilter,categoryFilter,chapterFilter,typeFilter].forEach(el=>el.value='');history.replaceState({},'', 'library.html');renderResources()});loadResources();
+</script>
+</body>
+</html>

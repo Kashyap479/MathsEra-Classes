@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06152f">
+<meta name="description" content="MathsEra Classes — Building Strong Foundations for Success. Mathematics-first learning platform for school, competitive, higher and future mathematics resources.">
+<title>MathsEra Classes | Building Strong Foundations for Success</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png" alt="MathsEra Classes">
+      <span><b>MathsEra Classes</b><small>Building Strong Foundations for Success</small></span>
+    </a>
+    <nav class="desktop-nav">
+      <a href="#mathematics">Mathematics</a>
+      <a href="#school">School</a>
+      <a href="#exams">Exams</a>
+      <a href="#resources">Resources</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a class="admin-link" href="admin.html">🔐 Admin Login</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#mathematics">📐 Mathematics</a>
+    <a href="#school">🏫 School Learning</a>
+    <a href="#exams">🎯 Competitive Exams</a>
+    <a href="#resources">📚 Resources</a>
+    <a href="about.html">ℹ️ About Us</a>
+    <a href="contact.html">📞 Contact Us</a>
+    <a href="https://www.instagram.com/mathsera_classes/" target="_blank" rel="noopener">📸 Instagram</a>
+    <a href="https://www.youtube.com/@MathsEraClasses" target="_blank" rel="noopener">▶️ YouTube</a>
+    <a href="https://wa.me/919997766625" target="_blank" rel="noopener">💬 WhatsApp</a>
+    <a href="mailto:mathseraclasses2025@gmail.com">📧 Email</a>
+    <a class="admin-link" href="admin.html">🔐 Admin Login</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">MATHEMATICS FIRST • EDUCATION PLATFORM</div>
+      <h1>Learn Maths.<br><span>Understand Deeply.</span><br>Grow Further.</h1>
+      <p class="hero-text">From school Mathematics to competitive, graduation and higher Mathematics — with Science, Physics and exam preparation growing alongside it.</p>
+      <form class="search-box" id="searchForm">
+        <input id="searchInput" placeholder="Search class, chapter, question, exam or topic..." autocomplete="off">
+        <button>SEARCH</button>
+      </form>
+      <div class="chips">
+        <a href="#school">School Maths</a>
+        <a href="#exams">Competitive Maths</a>
+        <a href="#higher">Higher Maths</a>
+        <a href="#resources">Resources</a>
+      </div>
+    </div>
+    <div class="hero-logo">
+      <div class="logo-frame"><img src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png" alt="MathsEra Classes logo"></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-wrap">
+  <div class="container stats">
+    <div><b id="statSolutions">—</b><span>Published Solutions</span></div>
+    <div><b>6–12</b><span>School Learning</span></div>
+    <div><b>CBSE + UP</b><span>Boards & Growing</span></div>
+    <div><b>∞</b><span>Future Categories</span></div>
+  </div>
+</section>
+
+<section id="mathematics">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="eyebrow blue">CORE OF MATHSERA</div><h2>Explore Mathematics</h2></div>
+      <p>Mathematics remains the permanent main focus — from school foundations to competitive, graduation, PG and NET.</p>
+    </div>
+    <div class="category-grid">
+      <a class="category featured" href="library.html?category=school-maths">
+        <span class="icon">📘</span><small>SCHOOL MATHEMATICS</small><h3>Classes 6–12</h3>
+        <p>Notes, concepts, diagrams, solutions, exercises and revision.</p><b>Explore →</b>
+      </a>
+      <a class="category" href="library.html?category=competitive">
+        <span class="icon">🏆</span><small>COMPETITIVE</small><h3>JEE • NDA • CUET • TET</h3>
+        <p>Exam-oriented Mathematics, practice, PYQs and strategy.</p><b>Explore →</b>
+      </a>
+      <a class="category" id="higher" href="library.html?category=higher-maths">
+        <span class="icon">🎓</span><small>HIGHER MATHEMATICS</small><h3>Graduation • PG • NET</h3>
+        <p>University-level and advanced Mathematics resources.</p><b>Future expansion →</b>
+      </a>
+      <a class="category" href="library.html?category=boards">
+        <span class="icon">🏫</span><small>BOARDS</small><h3>CBSE • UP • State Boards</h3>
+        <p>Syllabus, pattern, PYQs, important questions and preparation.</p><b>Explore →</b>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="school" class="soft">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="eyebrow blue">SCHOOL EDUCATION</div><h2>Classes & Subjects</h2></div>
+      <p>Start with class, board and subject. More subjects can be added later without rebuilding the platform.</p>
+    </div>
+    <div class="subject-grid">
+      <a href="library.html?subject=Mathematics"><span>📐</span><h3>Mathematics</h3><p>Classes 6–12 • Core focus</p><small>Notes • Solutions • Diagrams • PYQ</small></a>
+      <a href="library.html?subject=Science"><span>🔬</span><h3>Science</h3><p>Classes 6–10</p><small>Notes • Concepts • Diagrams • Videos</small></a>
+      <a href="library.html?subject=Physics"><span>⚡</span><h3>Physics</h3><p>Classes 11–12</p><small>Concepts • Numericals • Derivations</small></a>
+    </div>
+  </div>
+</section>
+
+<section id="exams">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="eyebrow blue">EXAM PREPARATION</div><h2>Prepare Smarter</h2></div>
+      <p>New examinations can be added as MathsEra grows.</p>
+    </div>
+    <div class="exam-grid">
+      <a href="library.html?exam=JEE">🎯 <b>JEE</b><span>Mathematics • PYQs • Practice</span></a>
+      <a href="library.html?exam=NEET">🧬 <b>NEET</b><span>Science • Physics • Preparation</span></a>
+      <a href="library.html?exam=NDA">🪖 <b>NDA</b><span>Mathematics • Reasoning • PYQs</span></a>
+      <a href="library.html?exam=CUET">🎓 <b>CUET</b><span>Mathematics • Practice • Strategy</span></a>
+      <a href="library.html?exam=TET">👨‍🏫 <b>TET</b><span>Teaching exams • Maths • Practice</span></a>
+      <a href="library.html?exam=NET">📚 <b>NET</b><span>Higher Mathematics • Future expansion</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="resources" class="soft">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="eyebrow blue">MORE THAN SOLUTIONS</div><h2>Complete Learning Library</h2></div>
+      <p>One platform for multiple ways of learning.</p>
+    </div>
+    <div class="resource-grid">
+      <div><span>✍️</span><b>Notes & Explanations</b><small>Concept-first written learning.</small></div>
+      <div><span>🖼️</span><b>Diagrams & Images</b><small>Visual explanations for difficult concepts.</small></div>
+      <div><span>📄</span><b>PDF Resources</b><small>Notes, worksheets and revision PDFs.</small></div>
+      <div><span>🎥</span><b>Video Learning</b><small>Topic-linked video lessons.</small></div>
+      <div><span>📝</span><b>PYQs & Practice</b><small>Previous-year and important questions.</small></div>
+      <div><span>🔎</span><b>Smart Search</b><small>Search by class, chapter, exam or topic.</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container cta-box">
+    <div><div class="eyebrow">THE MATHSERA JOURNEY</div><h2>From School Maths to Higher Mathematics.</h2><p>One growing platform. One strong Mathematics-first identity.</p></div>
+    <a href="library.html">Explore Learning Library →</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div><img src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png" alt="MathsEra Classes"><p><b>MathsEra Classes</b><br>Building Strong Foundations for Success<br>Saharanpur • Praveen Sir</p></div>
+    <div><h4>Platform</h4><a href="#mathematics">Mathematics</a><a href="#school">School Learning</a><a href="#exams">Exams</a><a href="#resources">Resources</a></div>
+    <div><h4>Connect</h4><a href="about.html">About Us</a><a href="contact.html">Contact Us</a><a href="admin.html">🔐 Admin Login</a></div>
+  </div>
+  <div class="container copyright">© <span id="year"></span> MathsEra Classes. All rights reserved.</div>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

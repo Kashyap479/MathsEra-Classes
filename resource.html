@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06152f">
+<title>Resource | MathsEra Classes</title>
+<meta id="metaDescription" name="description" content="MathsEra Classes learning resource.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<style>
+.resource-page{padding:28px 0 80px}
+.resource-shell{max-width:980px;margin:auto}
+.top-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.back-btn,.library-btn,.share-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;text-decoration:none;cursor:pointer;font:inherit;font-weight:700;padding:11px 15px;border-radius:12px}
+.back-btn{background:#e8edf5;color:#10203b}.library-btn{background:#1683ff;color:#fff}.share-btn{background:#edf4ff;color:#244c82}
+.resource-detail{background:#fff;border:1px solid #e6ebf2;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(6,21,47,.08)}
+.hero-image-wrap{position:relative;background:#eef3f8;border-bottom:1px solid #e6ebf2}
+.resource-detail-image{width:100%;max-height:720px;object-fit:contain;display:block;cursor:zoom-in;background:#eef3f8}
+.image-hint{position:absolute;right:12px;bottom:12px;background:rgba(6,21,47,.82);color:#fff;padding:8px 11px;border-radius:10px;font-size:12px;font-weight:600;pointer-events:none}
+.resource-detail-content{padding:30px}
+.resource-detail-type{color:#3774c5;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.resource-detail h1{margin:9px 0 17px;font-size:clamp(28px,5vw,46px);line-height:1.2;color:#101828}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:25px}.tag{background:#edf4ff;color:#244c82;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:600}
+.detail-divider{height:1px;background:#e8edf3;margin:0 0 25px}
+.section-label{font-size:13px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#3774c5;margin-bottom:10px}
+.resource-explanation{color:#344054;line-height:1.85;font-size:16px;white-space:pre-wrap}
+.empty-body{color:#667085;background:#f7f9fc;border-radius:14px;padding:18px}
+.related-section{margin-top:26px}.related-section h2{margin:0 0 15px;font-size:25px}.related-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.related-card{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #e6ebf2;border-radius:17px;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}.related-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(6,21,47,.08)}
+.related-image{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#eef3f8}.related-content{padding:14px}.related-type{font-size:11px;font-weight:800;letter-spacing:1px;color:#3774c5;text-transform:uppercase}.related-title{font-weight:800;line-height:1.35;margin-top:6px}.related-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.related-tag{font-size:11px;background:#f0f4f9;color:#526071;padding:5px 8px;border-radius:999px}
+.loading,.error-box,.not-found{padding:45px;text-align:center}.error-box{color:#a52b2b;background:#fff0f0;border:1px solid #ffd0d0;border-radius:15px}.error-box a{display:inline-flex;margin-top:16px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modal img{max-width:96vw;max-height:92vh;object-fit:contain;border-radius:10px}.modal-close{position:fixed;top:14px;right:16px;width:44px;height:44px;border:0;border-radius:50%;background:#fff;color:#06152f;font-size:25px;cursor:pointer}.modal-caption{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;padding:8px 13px;border-radius:10px;font-size:12px;max-width:85vw;text-align:center}
+@media(max-width:700px){.resource-page{padding:18px 0 55px}.resource-detail-content{padding:20px}.resource-detail-image{max-height:520px}.top-actions{justify-content:flex-start}.top-actions .library-btn{margin-left:auto}.related-grid{grid-template-columns:1fr}.image-hint{font-size:11px}.resource-explanation{font-size:15px;line-height:1.75}}
+</style>
+</head>
+<body>
+<header class="topbar">
+<div class="container nav">
+<a class="brand" href="index.html"><img src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png" alt="MathsEra Classes"><span><b>MathsEra Classes</b><small>Building Strong Foundations for Success</small></span></a>
+<nav class="desktop-nav"><a href="index.html">Home</a><a href="library.html">Learning Library</a><a href="admin.html" class="admin-link">🔐 Admin</a></nav>
+<button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+</div>
+<div class="mobile-nav" id="mobileNav"><a href="index.html">🏠 Home</a><a href="library.html">📚 Learning Library</a><a href="admin.html">🔐 Admin Login</a></div>
+</header>
+
+<main class="resource-page">
+<div class="container resource-shell">
+<div class="top-actions">
+<a class="back-btn" href="library.html">← Back to Library</a>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="share-btn" id="shareBtn" type="button">↗ Share</button><a class="library-btn" href="library.html">📚 More Solutions</a></div>
+</div>
+
+<article id="resourceDetail" class="resource-detail"><div class="loading">Loading resource...</div></article>
+
+<section id="relatedSection" class="related-section" hidden>
+<h2>Related Solutions</h2>
+<div id="relatedGrid" class="related-grid"></div>
+</section>
+</div>
+</main>
+
+<footer><div class="container copyright">© <span id="year"></span> MathsEra Classes. All rights reserved.</div></footer>
+
+<div class="modal" id="imageModal" role="dialog" aria-modal="true" aria-label="Full solution image">
+<button class="modal-close" id="modalClose" type="button" aria-label="Close image">×</button>
+<img id="modalImage" src="" alt="Full solution">
+<div class="modal-caption" id="modalCaption"></div>
+</div>
+
+<script>
+const menuBtn=document.getElementById("menuBtn");
+const mobileNav=document.getElementById("mobileNav");
+if(menuBtn&&mobileNav){menuBtn.addEventListener("click",()=>mobileNav.classList.toggle("open"))}
+document.querySelectorAll(".mobile-nav a").forEach(link=>link.addEventListener("click",()=>mobileNav.classList.remove("open")));
+document.getElementById("year").textContent=new Date().getFullYear();
+
+let client=null;
+try{
+  if(window.MATHSERA_SUPABASE_URL&&window.MATHSERA_SUPABASE_PUBLISHABLE_KEY){
+    client=supabase.createClient(window.MATHSERA_SUPABASE_URL,window.MATHSERA_SUPABASE_PUBLISHABLE_KEY);
+  }
+}catch(error){console.error("Supabase initialization error:",error)}
+
+const detail=document.getElementById("resourceDetail");
+const relatedSection=document.getElementById("relatedSection");
+const relatedGrid=document.getElementById("relatedGrid");
+const shareBtn=document.getElementById("shareBtn");
+const imageModal=document.getElementById("imageModal");
+const modalImage=document.getElementById("modalImage");
+const modalCaption=document.getElementById("modalCaption");
+const modalClose=document.getElementById("modalClose");
+
+function escapeHtml(value){return String(value??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function tag(label){return label?`<span class="tag">${escapeHtml(label)}</span>`:""}
+function relatedTag(label){return label?`<span class="related-tag">${escapeHtml(label)}</span>`:""}
+function getId(){return new URLSearchParams(window.location.search).get("id")}
+
+function openImage(url,title){
+  modalImage.src=url; modalImage.alt=title||"MathsEra Solution"; modalCaption.textContent=title||"MathsEra Solution"; imageModal.classList.add("open"); document.body.style.overflow="hidden";
+}
+function closeImage(){imageModal.classList.remove("open");modalImage.src="";document.body.style.overflow=""}
+modalClose.addEventListener("click",closeImage);
+imageModal.addEventListener("click",e=>{if(e.target===imageModal)closeImage()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeImage()});
+
+async function sharePage(title){
+  try{
+    if(navigator.share){await navigator.share({title:title||"MathsEra Classes",text:"MathsEra Classes Learning Resource",url:window.location.href});return}
+    await navigator.clipboard.writeText(window.location.href);
+    const old=shareBtn.textContent;shareBtn.textContent="✓ Link Copied";setTimeout(()=>shareBtn.textContent=old,1800);
+  }catch(e){console.log("Share cancelled",e)}
+}
+shareBtn.addEventListener("click",()=>sharePage(document.title));
+
+function renderResource(data){
+  document.title=`${data.title||"Resource"} | MathsEra Classes`;
+  document.getElementById("metaDescription").setAttribute("content",`${data.title||"MathsEra learning resource"} — ${data.class_name||""} ${data.board||""} ${data.chapter||""}`.trim());
+
+  const image=data.image_url?`<div class="hero-image-wrap"><img id="mainResourceImage" class="resource-detail-image" src="${escapeHtml(data.image_url)}" alt="${escapeHtml(data.title||"MathsEra Solution")}" loading="eager"><div class="image-hint">Tap image to enlarge</div></div>`:"";
+  const bodyText=String(data.body||"").trim();
+
+  detail.innerHTML=`
+    ${image}
+    <div class="resource-detail-content">
+      <div class="resource-detail-type">${escapeHtml(data.content_type||"Resource")}</div>
+      <h1>${escapeHtml(data.title||"MathsEra Resource")}</h1>
+      <div class="tags">${tag(data.category)}${data.class_name?tag("Class "+data.class_name):""}${tag(data.board)}${tag(data.chapter)}</div>
+      <div class="detail-divider"></div>
+      <div class="section-label">Solution / Explanation</div>
+      ${bodyText?`<div class="resource-explanation">${escapeHtml(bodyText)}</div>`:`<div class="empty-body">The detailed written explanation is not available for this resource. Please use the solution image above.</div>`}
+    </div>`;
+
+  const mainImage=document.getElementById("mainResourceImage");
+  if(mainImage)mainImage.addEventListener("click",()=>openImage(data.image_url,data.title));
+}
+
+async function loadRelated(data){
+  if(!client)return;
+  try{
+    let query=client.from("resources").select("id,title,category,class_name,board,chapter,content_type,image_url,created_at").eq("published",true).neq("id",data.id).order("created_at",{ascending:false}).limit(4);
+    if(data.chapter) query=query.eq("chapter",data.chapter);
+    else if(data.category) query=query.eq("category",data.category);
+    const {data:rows,error}=await query;
+    if(error)throw error;
+    if(!rows||!rows.length)return;
+    relatedGrid.innerHTML=rows.map(row=>`
+      <a class="related-card" href="resource.html?id=${encodeURIComponent(row.id)}">
+        ${row.image_url?`<img class="related-image" src="${escapeHtml(row.image_url)}" alt="${escapeHtml(row.title||"Solution")}" loading="lazy">`:""}
+        <div class="related-content">
+          <div class="related-type">${escapeHtml(row.content_type||"Resource")}</div>
+          <div class="related-title">${escapeHtml(row.title||"MathsEra Resource")}</div>
+          <div class="related-tags">${relatedTag(row.class_name?"Class "+row.class_name:"")}${relatedTag(row.board)}${relatedTag(row.chapter)}</div>
+        </div>
+      </a>`).join("");
+    relatedSection.hidden=false;
+  }catch(error){console.error("Related resources error:",error)}
+}
+
+async function loadResource(){
+  const id=getId();
+  if(!id){detail.innerHTML='<div class="not-found"><h2>Resource not found</h2><p>Please open a resource from the Learning Library.</p><a class="back-btn" href="library.html">← Back to Library</a></div>';return}
+  if(!client){detail.innerHTML='<div class="error-box"><b>Supabase connection failed.</b><br><br>Please check supabase-config.js.</div>';return}
+  try{
+    const {data,error}=await client.from("resources").select("id,title,category,class_name,board,chapter,content_type,body,image_url,published,created_at").eq("id",id).eq("published",true).single();
+    if(error)throw error;
+    if(!data)throw new Error("Resource not found.");
+    renderResource(data);
+    loadRelated(data);
+  }catch(error){
+    console.error("Resource error:",error);
+    detail.innerHTML=`<div class="error-box"><b>Resource could not be loaded.</b><br><br>${escapeHtml(error.message||"Unknown error")}<br><a class="back-btn" href="library.html">← Back to Library</a></div>`;
+  }
+}
+loadResource();
+</script>
+</body>
+</html>

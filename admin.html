@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06152f">
+<title>MathsEra Admin | Publish Solution</title>
+
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+<style>
+.admin-step4{
+  padding:32px 0 70px;
+}
+.admin-card{
+  max-width:980px;
+  margin:0 auto;
+  background:#fff;
+  border:1px solid #e5eaf2;
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 10px 35px rgba(6,21,47,.08);
+}
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.admin-field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.admin-field.full{
+  grid-column:1/-1;
+}
+.admin-field label{
+  font-weight:700;
+  color:#172033;
+}
+.admin-field input,
+.admin-field select,
+.admin-field textarea{
+  width:100%;
+  box-sizing:border-box;
+  padding:12px 13px;
+  border:1px solid #d9e0ea;
+  border-radius:12px;
+  background:#fff;
+  font:inherit;
+  outline:none;
+}
+.admin-field textarea{
+  min-height:110px;
+  resize:vertical;
+}
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus{
+  border-color:#1683ff;
+  box-shadow:0 0 0 3px rgba(22,131,255,.12);
+}
+.admin-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+.admin-actions button{
+  border:0;
+  border-radius:12px;
+  padding:13px 18px;
+  font-weight:800;
+  cursor:pointer;
+}
+.publish-btn{
+  background:#1683ff;
+  color:#fff;
+}
+.clear-btn{
+  background:#e8edf5;
+  color:#10203b;
+}
+.publish-btn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+.status{
+  margin-top:14px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:#f5f8fc;
+  color:#667085;
+  min-height:20px;
+}
+.status.success{
+  background:#ecfdf3;
+  color:#147a43;
+}
+.status.error{
+  background:#fff1f1;
+  color:#a52b2b;
+}
+.image-preview{
+  margin-top:10px;
+  max-width:100%;
+  max-height:280px;
+  border-radius:14px;
+  border:1px solid #e5eaf2;
+  display:none;
+  object-fit:contain;
+}
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:16px;
+}
+.panel-head h2{
+  margin:0;
+}
+.session-box{
+  padding:12px 14px;
+  border-radius:12px;
+  background:#f5f8fc;
+  color:#667085;
+  margin-bottom:18px;
+}
+.login-only{
+  max-width:520px;
+  margin:60px auto;
+}
+.hidden{
+  display:none !important;
+}
+.resource-admin-list{
+  display:grid;
+  gap:12px;
+  margin-top:18px;
+}
+.resource-admin-item{
+  display:grid;
+  grid-template-columns:110px 1fr auto;
+  gap:14px;
+  align-items:center;
+  padding:14px;
+  border:1px solid #e5eaf2;
+  border-radius:16px;
+  background:#fff;
+}
+.resource-admin-item img{
+  width:110px;
+  height:82px;
+  object-fit:cover;
+  border-radius:10px;
+  background:#eef3f8;
+}
+.resource-admin-item h3{
+  margin:0 0 6px;
+  font-size:17px;
+}
+.meta{
+  color:#687384;
+  font-size:13px;
+  line-height:1.5;
+}
+.view-btn{
+  display:inline-block;
+  padding:9px 12px;
+  border-radius:10px;
+  background:#edf4ff;
+  color:#24558f;
+  text-decoration:none;
+  font-weight:700;
+}
+@media(max-width:700px){
+  .admin-card{padding:18px}
+  .admin-grid{grid-template-columns:1fr}
+  .admin-field.full{grid-column:auto}
+  .resource-admin-item{grid-template-columns:80px 1fr}
+  .resource-admin-item img{width:80px;height:65px}
+  .resource-admin-item .view-wrap{grid-column:1/-1}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png" alt="MathsEra Classes">
+      <span>
+        <b>MathsEra Classes</b>
+        <small>Building Strong Foundations for Success</small>
+      </span>
+    </a>
+
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="library.html">Learning Library</a>
+      <a href="admin.html">Admin</a>
+      <button id="logoutBtn" class="admin-link hidden" type="button">Logout</button>
+    </nav>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">🏠 Home</a>
+    <a href="library.html">📚 Learning Library</a>
+    <button id="mobileLogoutBtn" type="button" class="hidden">🔐 Logout</button>
+  </div>
+</header>
+
+<main class="admin-step4">
+<div class="container">
+
+  <section id="loginCard" class="admin-card login-only">
+    <div class="eyebrow blue">SECURE ADMIN ACCESS</div>
+    <h1>Admin Login</h1>
+    <p class="library-desc">
+      MathsEra Classes ke solutions publish karne ke liye login karein.
+    </p>
+
+    <form id="loginForm">
+      <div class="admin-field">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" type="email" placeholder="Admin email" required>
+      </div>
+
+      <div class="admin-field" style="margin-top:14px">
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" placeholder="Password" required>
+      </div>
+
+      <div class="admin-actions">
+        <button id="loginBtn" class="publish-btn" type="submit">LOGIN</button>
+      </div>
+
+      <div id="loginStatus" class="status"></div>
+    </form>
+  </section>
+
+  <section id="dashboard" class="hidden">
+
+    <div class="admin-card">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow blue">PUBLISH NEW MATERIAL</div>
+          <h1 style="margin:6px 0 0">Add Solution</h1>
+        </div>
+        <button id="dashboardLogoutBtn" class="clear-btn" type="button">LOGOUT</button>
+      </div>
+
+      <div id="sessionBox" class="session-box">Admin session active.</div>
+
+      <form id="solutionForm">
+        <div class="admin-grid">
+
+          <div class="admin-field">
+            <label for="className">Class</label>
+            <select id="className" required>
+              <option value="9">Class 9</option>
+              <option value="10" selected>Class 10</option>
+              <option value="11">Class 11</option>
+              <option value="12">Class 12</option>
+            </select>
+          </div>
+
+          <div class="admin-field">
+            <label for="board">Board</label>
+            <select id="board" required>
+              <option value="CBSE" selected>CBSE</option>
+              <option value="UP Board">UP Board</option>
+            </select>
+          </div>
+
+          <div class="admin-field">
+            <label for="category">Subject / Category</label>
+            <input id="category" value="Mathematics" placeholder="Mathematics" required>
+          </div>
+
+          <div class="admin-field">
+            <label for="chapter">Chapter</label>
+            <input id="chapter" placeholder="Quadratic Equations" required>
+          </div>
+
+          <div class="admin-field">
+            <label for="contentType">Content Type</label>
+            <select id="contentType" required>
+              <option value="Solution" selected>Solution</option>
+              <option value="Notes">Notes</option>
+              <option value="Diagram">Diagram</option>
+              <option value="Practice">Practice</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="admin-field">
+            <label for="questionNo">Question No. (optional)</label>
+            <input id="questionNo" placeholder="5">
+          </div>
+
+          <div class="admin-field full">
+            <label for="title">Question / SEO Title</label>
+            <input id="title" placeholder="Class 10 Maths Quadratic Equations Exercise 4.3 Question 5 Solution" required>
+          </div>
+
+          <div class="admin-field full">
+            <label for="body">Solution / Explanation (optional)</label>
+            <textarea id="body" placeholder="Step-by-step written explanation..."></textarea>
+          </div>
+
+          <div class="admin-field full">
+            <label for="image">Solution Image</label>
+            <input id="image" type="file" accept="image/*" required>
+            <img id="imagePreview" class="image-preview" alt="Solution preview">
+          </div>
+
+        </div>
+
+        <div class="admin-actions">
+          <button id="publishBtn" class="publish-btn" type="submit">
+            PUBLISH SOLUTION
+          </button>
+          <button id="clearBtn" class="clear-btn" type="button">
+            CLEAR
+          </button>
+        </div>
+
+        <div id="publishStatus" class="status"></div>
+      </form>
+    </div>
+
+    <div class="admin-card" style="margin-top:20px">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow blue">ONLINE LIBRARY</div>
+          <h2>Published Solutions</h2>
+        </div>
+        <button id="refreshBtn" class="clear-btn" type="button">REFRESH</button>
+      </div>
+
+      <div id="resourceList" class="resource-admin-list">
+        <div class="status">Loading...</div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="container copyright">
+    © <span id="year"></span> MathsEra Classes. All rights reserved.
+  </div>
+</footer>
+
+<script src="admin.js?v=step4"></script>
+</body>
+</html>
