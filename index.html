@@ -1,0 +1,1560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06152f">
+
+<meta name="description"
+content="MathsEra Classes — Mathematics and Physics learning platform by Praveen Kashyap, Saharanpur. Classes 9th–12th.">
+
+<title>MathsEra Classes | Praveen Kashyap</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="topbar">
+
+  <div class="container nav">
+
+    <a class="brand" href="index.html">
+
+      <img
+        src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png"
+        alt="MathsEra Classes">
+
+      <span>
+        <b>MathsEra Classes</b>
+        <small>Building Strong Foundations for Success</small>
+      </span>
+
+    </a>
+
+    <nav class="desktop-nav">
+
+      <a href="#mathematics">Mathematics</a>
+      <a href="#school">School</a>
+      <a href="#exams">Exams</a>
+      <a href="#resources">Resources</a>
+      <a href="#teacher">Praveen Sir</a>
+
+      <!-- VIEW LIBRARY -->
+      <a href="library.html">📚 View Library</a>
+
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+
+      <a class="admin-link" href="admin.html">
+        🔐 Admin Login
+      </a>
+
+    </nav>
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      aria-label="Open menu">
+      ☰
+    </button>
+
+  </div>
+
+
+  <!-- ================= MOBILE MENU ================= -->
+
+  <div class="mobile-nav" id="mobileNav">
+
+    <a href="#mathematics">
+      📐 Mathematics
+    </a>
+
+    <a href="#school">
+      🏫 School Learning
+    </a>
+
+    <a href="#exams">
+      🎯 Competitive Exams
+    </a>
+
+    <a href="#resources">
+      📚 Resources
+    </a>
+
+    <a href="#teacher">
+      👨‍🏫 Praveen Sir
+    </a>
+
+    <!-- VIEW LIBRARY -->
+    <a href="library.html">
+      📚 View Learning Library
+    </a>
+
+    <a href="about.html">
+      ℹ️ About Us
+    </a>
+
+    <a href="contact.html">
+      📞 Contact Us
+    </a>
+
+    <a
+      href="https://www.instagram.com/mathsera_classes/"
+      target="_blank"
+      rel="noopener">
+      📸 Instagram
+    </a>
+
+    <a
+      href="https://www.youtube.com/@MathsEraClasses"
+      target="_blank"
+      rel="noopener">
+      ▶️ YouTube
+    </a>
+
+    <a
+      href="https://wa.me/919997766625"
+      target="_blank"
+      rel="noopener">
+      💬 WhatsApp
+    </a>
+
+    <a href="mailto:mathseraclasses2025@gmail.com">
+      📧 Email
+    </a>
+
+    <a class="admin-link" href="admin.html">
+      🔐 Admin Login
+    </a>
+
+  </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+  <div class="container hero-grid">
+
+    <div>
+
+      <div class="eyebrow">
+        MATHEMATICS FIRST • EDUCATION PLATFORM
+      </div>
+
+      <h1>
+        Learn Maths.
+        <br>
+        <span>Understand Deeply.</span>
+        <br>
+        Grow Further.
+      </h1>
+
+      <p class="hero-text">
+        From school Mathematics to competitive, graduation and higher Mathematics —
+        with Science, Physics and exam preparation growing alongside it.
+      </p>
+
+
+      <!-- SEARCH -->
+
+      <form class="search-box" id="searchForm">
+
+        <input
+          id="searchInput"
+          placeholder="Search class, chapter, question, exam or topic..."
+          autocomplete="off">
+
+        <button>
+          SEARCH
+        </button>
+
+      </form>
+
+
+      <div class="chips">
+
+        <a href="#school">
+          School Maths
+        </a>
+
+        <a href="#exams">
+          Competitive Maths
+        </a>
+
+        <a href="#higher">
+          Higher Maths
+        </a>
+
+        <a href="#resources">
+          Resources
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- HERO LOGO -->
+
+    <div class="hero-logo">
+
+      <div class="logo-frame">
+
+        <img
+          src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png"
+          alt="MathsEra Classes logo">
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats-wrap">
+
+  <div class="container stats">
+
+    <div>
+      <b id="statSolutions">—</b>
+      <span>Published Solutions</span>
+    </div>
+
+    <div>
+      <b>9–12</b>
+      <span>Classes</span>
+    </div>
+
+    <div>
+      <b>Maths + Physics</b>
+      <span>Subjects</span>
+    </div>
+
+    <div>
+      <b>Saharanpur</b>
+      <span>MathsEra Classes</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= MATHEMATICS ================= -->
+
+<section id="mathematics">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow blue">
+          CORE OF MATHSERA
+        </div>
+
+        <h2>
+          Explore Mathematics
+        </h2>
+
+      </div>
+
+      <p>
+        Mathematics remains the permanent main focus —
+        from school foundations to competitive, graduation,
+        PG and NET.
+      </p>
+
+    </div>
+
+
+    <div class="category-grid">
+
+
+      <a
+        class="category featured"
+        href="library.html?category=school-maths">
+
+        <span class="icon">📘</span>
+
+        <small>
+          SCHOOL MATHEMATICS
+        </small>
+
+        <h3>
+          Classes 6–12
+        </h3>
+
+        <p>
+          Notes, concepts, diagrams, solutions,
+          exercises and revision.
+        </p>
+
+        <b>
+          Explore →
+        </b>
+
+      </a>
+
+
+
+      <a
+        class="category"
+        href="library.html?category=competitive">
+
+        <span class="icon">🏆</span>
+
+        <small>
+          COMPETITIVE
+        </small>
+
+        <h3>
+          JEE • NDA • CUET • TET
+        </h3>
+
+        <p>
+          Exam-oriented Mathematics,
+          practice, PYQs and strategy.
+        </p>
+
+        <b>
+          Explore →
+        </b>
+
+      </a>
+
+
+
+      <a
+        class="category"
+        id="higher"
+        href="library.html?category=higher-maths">
+
+        <span class="icon">🎓</span>
+
+        <small>
+          HIGHER MATHEMATICS
+        </small>
+
+        <h3>
+          Graduation • PG • NET
+        </h3>
+
+        <p>
+          University-level and advanced
+          Mathematics resources.
+        </p>
+
+        <b>
+          Future expansion →
+        </b>
+
+      </a>
+
+
+
+      <a
+        class="category"
+        href="library.html?category=boards">
+
+        <span class="icon">🏫</span>
+
+        <small>
+          BOARDS
+        </small>
+
+        <h3>
+          CBSE • UP • State Boards
+        </h3>
+
+        <p>
+          Syllabus, pattern, PYQs,
+          important questions and preparation.
+        </p>
+
+        <b>
+          Explore →
+        </b>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= SCHOOL ================= -->
+
+<section id="school" class="soft">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow blue">
+          SCHOOL EDUCATION
+        </div>
+
+        <h2>
+          Classes & Subjects
+        </h2>
+
+      </div>
+
+      <p>
+        Start with class, board and subject.
+        More subjects can be added later without rebuilding
+        the platform.
+      </p>
+
+    </div>
+
+
+    <div class="subject-grid">
+
+
+      <a href="library.html?subject=Mathematics">
+
+        <span>📐</span>
+
+        <h3>
+          Mathematics
+        </h3>
+
+        <p>
+          Classes 6–12 • Core focus
+        </p>
+
+        <small>
+          Notes • Solutions • Diagrams • PYQ
+        </small>
+
+      </a>
+
+
+
+      <a href="library.html?subject=Science">
+
+        <span>🔬</span>
+
+        <h3>
+          Science
+        </h3>
+
+        <p>
+          Classes 6–10
+        </p>
+
+        <small>
+          Notes • Concepts • Diagrams • Videos
+        </small>
+
+      </a>
+
+
+
+      <a href="library.html?subject=Physics">
+
+        <span>⚡</span>
+
+        <h3>
+          Physics
+        </h3>
+
+        <p>
+          Classes 11–12
+        </p>
+
+        <small>
+          Concepts • Numericals • Derivations
+        </small>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= EXAMS ================= -->
+
+<section id="exams">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow blue">
+          EXAM PREPARATION
+        </div>
+
+        <h2>
+          Prepare Smarter
+        </h2>
+
+      </div>
+
+      <p>
+        New examinations can be added as MathsEra grows.
+      </p>
+
+    </div>
+
+
+    <div class="exam-grid">
+
+
+      <a href="library.html?exam=JEE">
+        🎯
+        <b>JEE</b>
+        <span>
+          Mathematics • PYQs • Practice
+        </span>
+      </a>
+
+
+      <a href="library.html?exam=NEET">
+        🧬
+        <b>NEET</b>
+        <span>
+          Science • Physics • Preparation
+        </span>
+      </a>
+
+
+      <a href="library.html?exam=NDA">
+        🪖
+        <b>NDA</b>
+        <span>
+          Mathematics • Reasoning • PYQs
+        </span>
+      </a>
+
+
+      <a href="library.html?exam=CUET">
+        🎓
+        <b>CUET</b>
+        <span>
+          Mathematics • Practice • Strategy
+        </span>
+      </a>
+
+
+      <a href="library.html?exam=TET">
+        👨‍🏫
+        <b>TET</b>
+        <span>
+          Teaching exams • Maths • Practice
+        </span>
+      </a>
+
+
+      <a href="library.html?exam=NET">
+        📚
+        <b>NET</b>
+        <span>
+          Higher Mathematics • Future expansion
+        </span>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= RESOURCES ================= -->
+
+<section id="resources" class="soft">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow blue">
+          MORE THAN SOLUTIONS
+        </div>
+
+        <h2>
+          Complete Learning Library
+        </h2>
+
+      </div>
+
+      <p>
+        One platform for multiple ways of learning.
+      </p>
+
+    </div>
+
+
+    <div class="resource-grid">
+
+
+      <div>
+        <span>✍️</span>
+        <b>Notes & Explanations</b>
+        <small>
+          Concept-first written learning.
+        </small>
+      </div>
+
+
+      <div>
+        <span>🖼️</span>
+        <b>Diagrams & Images</b>
+        <small>
+          Visual explanations for difficult concepts.
+        </small>
+      </div>
+
+
+      <div>
+        <span>📄</span>
+        <b>PDF Resources</b>
+        <small>
+          Notes, worksheets and revision PDFs.
+        </small>
+      </div>
+
+
+      <div>
+        <span>🎥</span>
+        <b>Video Learning</b>
+        <small>
+          Topic-linked video lessons.
+        </small>
+      </div>
+
+
+      <div>
+        <span>📝</span>
+        <b>PYQs & Practice</b>
+        <small>
+          Previous-year and important questions.
+        </small>
+      </div>
+
+
+      <div>
+        <span>🔎</span>
+        <b>Smart Search</b>
+        <small>
+          Search by class, chapter, exam or topic.
+        </small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- ================= PRAVEEN SIR PROFILE =============== -->
+<!-- ===================================================== -->
+
+<section id="teacher" class="teacher-section">
+
+  <div class="container">
+
+    <div class="teacher-card">
+
+
+      <!-- PHOTO -->
+
+      <div class="teacher-photo-wrap">
+
+        <img
+          class="teacher-photo"
+          src="Praveen-sir.png"
+          alt="Praveen Kashyap - MathsEra Classes">
+
+        <div class="teacher-badge">
+          👨‍🏫 Maths & Physics Educator
+        </div>
+
+      </div>
+
+
+
+      <!-- DETAILS -->
+
+      <div class="teacher-content">
+
+        <div class="eyebrow blue">
+          MEET YOUR EDUCATOR
+        </div>
+
+        <h2>
+          Praveen Kashyap
+        </h2>
+
+        <p class="teacher-role">
+          Founder & Educator • MathsEra Classes, Saharanpur
+        </p>
+
+
+        <p class="teacher-about">
+
+          I believe Mathematics becomes easier when students
+          understand the concept behind every formula instead
+          of simply memorising it.
+
+          Through MathsEra Classes, my aim is to build strong
+          fundamentals, clear doubts step-by-step and help
+          students develop confidence in Mathematics and Physics
+          for their school and board examinations.
+
+        </p>
+
+
+        <!-- INFORMATION CARDS -->
+
+        <div class="teacher-info-grid">
+
+
+          <div>
+
+            <span>🎓</span>
+
+            <b>
+              Qualification
+            </b>
+
+            <small>
+              B.Tech (ME)
+              <br>
+              M.Sc (Mathematics)
+            </small>
+
+          </div>
+
+
+
+          <div>
+
+            <span>📐</span>
+
+            <b>
+              Mathematics
+            </b>
+
+            <small>
+              6–7 Years Teaching Experience
+            </small>
+
+          </div>
+
+
+
+          <div>
+
+            <span>⚡</span>
+
+            <b>
+              Physics
+            </b>
+
+            <small>
+              2–3 Years Teaching Experience
+            </small>
+
+          </div>
+
+
+
+          <div>
+
+            <span>📚</span>
+
+            <b>
+              Classes
+            </b>
+
+            <small>
+              9th–12th
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <!-- SUBJECTS -->
+
+        <div class="teacher-subjects">
+
+          <b>
+            Subjects:
+          </b>
+
+          <span>
+            Mathematics
+          </span>
+
+          <span>
+            Physics
+          </span>
+
+        </div>
+
+
+        <!-- LIBRARY BUTTON -->
+
+        <a
+          class="teacher-library-btn"
+          href="library.html">
+
+          📚 Explore MathsEra Learning Library →
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- ================= MATHSERA ADDRESS ================== -->
+<!-- ===================================================== -->
+
+<section id="classes" class="soft">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <div class="eyebrow blue">
+          MATHSERA CLASSES
+        </div>
+
+        <h2>
+          Visit & Connect With Us
+        </h2>
+
+      </div>
+
+      <p>
+        Mathematics and Physics classes for 9th–12th.
+      </p>
+
+    </div>
+
+
+    <div class="contact-cards">
+
+
+      <!-- ADDRESS -->
+
+      <div class="contact-card">
+
+        <span>📍</span>
+
+        <h3>
+          MathsEra Classes
+        </h3>
+
+        <p>
+
+          Raj Vihar Colony,
+          Old Ghas Kanta,
+          <br>
+
+          Paper Mill Road,
+          Saharanpur,
+          <br>
+
+          Uttar Pradesh – 247001
+
+        </p>
+
+      </div>
+
+
+
+      <!-- CONTACT -->
+
+      <div class="contact-card">
+
+        <span>📞</span>
+
+        <h3>
+          Contact
+        </h3>
+
+        <p>
+
+          <a href="tel:9997766625">
+            999-77-666-25
+          </a>
+
+        </p>
+
+        <p>
+
+          <a href="mailto:mathseraclasses2025@gmail.com">
+
+            mathseraclasses2025@gmail.com
+
+          </a>
+
+        </p>
+
+      </div>
+
+
+
+      <!-- TEACHING -->
+
+      <div class="contact-card">
+
+        <span>🎓</span>
+
+        <h3>
+          Teaching Focus
+        </h3>
+
+        <p>
+
+          Mathematics & Physics
+          <br>
+
+          Classes 9th–12th
+          <br>
+
+          CBSE • UP Board & Growing
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+  <div class="container cta-box">
+
+    <div>
+
+      <div class="eyebrow">
+        THE MATHSERA JOURNEY
+      </div>
+
+      <h2>
+        From School Maths to Higher Mathematics.
+      </h2>
+
+      <p>
+        One growing platform.
+        One strong Mathematics-first identity.
+      </p>
+
+    </div>
+
+
+    <a href="library.html">
+      Explore Learning Library →
+    </a>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <div class="container footer-grid">
+
+
+    <div>
+
+      <img
+        src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png"
+        alt="MathsEra Classes">
+
+      <p>
+
+        <b>
+          MathsEra Classes
+        </b>
+
+        <br>
+
+        Building Strong Foundations for Success
+
+        <br>
+
+        Saharanpur • Praveen Sir
+
+      </p>
+
+    </div>
+
+
+
+    <div>
+
+      <h4>
+        Platform
+      </h4>
+
+      <a href="#mathematics">
+        Mathematics
+      </a>
+
+      <a href="#school">
+        School Learning
+      </a>
+
+      <a href="#exams">
+        Exams
+      </a>
+
+      <a href="#resources">
+        Resources
+      </a>
+
+      <a href="library.html">
+        📚 View Library
+      </a>
+
+    </div>
+
+
+
+    <div>
+
+      <h4>
+        Connect
+      </h4>
+
+      <a href="#teacher">
+        👨‍🏫 Praveen Sir
+      </a>
+
+      <a href="about.html">
+        About Us
+      </a>
+
+      <a href="contact.html">
+        Contact Us
+      </a>
+
+      <a href="admin.html">
+        🔐 Admin Login
+      </a>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="container copyright">
+
+    ©
+    <span id="year"></span>
+    MathsEra Classes.
+    All rights reserved.
+
+  </div>
+
+</footer>
+
+
+
+<!-- ===================================================== -->
+<!-- ================= NEW SECTION CSS =================== -->
+<!-- ===================================================== -->
+
+<style>
+
+.teacher-section{
+  padding:72px 0;
+  background:#ffffff;
+}
+
+.teacher-card{
+  display:grid;
+  grid-template-columns:minmax(260px,360px) 1fr;
+  gap:48px;
+  align-items:center;
+
+  background:linear-gradient(
+    135deg,
+    #f7faff,
+    #ffffff
+  );
+
+  border:1px solid #dce7f5;
+  border-radius:28px;
+  padding:34px;
+
+  box-shadow:
+    0 18px 50px rgba(6,21,47,.08);
+}
+
+
+/* PHOTO */
+
+.teacher-photo-wrap{
+  position:relative;
+  max-width:360px;
+  width:100%;
+  margin:auto;
+}
+
+.teacher-photo{
+  display:block;
+
+  width:100%;
+
+  aspect-ratio:1/1;
+
+  object-fit:cover;
+
+  object-position:center top;
+
+  border-radius:24px;
+
+  border:7px solid #ffffff;
+
+  box-shadow:
+    0 15px 35px rgba(6,21,47,.18);
+}
+
+
+/* PHOTO BADGE */
+
+.teacher-badge{
+
+  position:absolute;
+
+  left:18px;
+  right:18px;
+  bottom:18px;
+
+  padding:11px 14px;
+
+  text-align:center;
+
+  border-radius:12px;
+
+  background:rgba(6,21,47,.92);
+
+  color:#ffffff;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  backdrop-filter:blur(8px);
+
+}
+
+
+/* TEACHER CONTENT */
+
+.teacher-content h2{
+
+  margin:
+    7px
+    0
+    4px;
+
+  font-size:
+    clamp(30px,4vw,46px);
+
+}
+
+
+.teacher-role{
+
+  margin:
+    0
+    0
+    18px;
+
+  color:#247edb;
+
+  font-weight:700;
+
+}
+
+
+.teacher-about{
+
+  color:#506078;
+
+  line-height:1.8;
+
+  max-width:760px;
+
+}
+
+
+/* INFORMATION */
+
+.teacher-info-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:12px;
+
+  margin:24px 0;
+
+}
+
+
+.teacher-info-grid > div{
+
+  padding:16px;
+
+  border:
+    1px solid #e0e8f2;
+
+  border-radius:16px;
+
+  background:#ffffff;
+
+}
+
+
+.teacher-info-grid span{
+
+  display:block;
+
+  font-size:23px;
+
+  margin-bottom:6px;
+
+}
+
+
+.teacher-info-grid b,
+.teacher-info-grid small{
+
+  display:block;
+
+}
+
+
+.teacher-info-grid small{
+
+  margin-top:5px;
+
+  color:#64748b;
+
+  line-height:1.5;
+
+}
+
+
+/* SUBJECTS */
+
+.teacher-subjects{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  align-items:center;
+
+  margin-bottom:22px;
+
+}
+
+
+.teacher-subjects span{
+
+  padding:
+    7px
+    13px;
+
+  border-radius:999px;
+
+  background:#eaf4ff;
+
+  color:#1268b3;
+
+  font-size:13px;
+
+  font-weight:700;
+
+}
+
+
+/* LIBRARY BUTTON */
+
+.teacher-library-btn{
+
+  display:inline-block;
+
+  padding:
+    13px
+    18px;
+
+  border-radius:12px;
+
+  background:#1687ee;
+
+  color:#ffffff !important;
+
+  font-weight:700;
+
+  text-decoration:none;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+
+.teacher-library-btn:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(22,135,238,.25);
+
+}
+
+
+/* CONTACT CARDS */
+
+.contact-cards{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
+
+}
+
+
+.contact-card{
+
+  background:#ffffff;
+
+  border:
+    1px solid #dce7f5;
+
+  border-radius:20px;
+
+  padding:25px;
+
+  box-shadow:
+    0 10px 30px rgba(6,21,47,.05);
+
+}
+
+
+.contact-card > span{
+
+  font-size:28px;
+
+}
+
+
+.contact-card h3{
+
+  margin:
+    10px
+    0
+    8px;
+
+}
+
+
+.contact-card p{
+
+  color:#5b687b;
+
+  line-height:1.7;
+
+  margin:6px 0;
+
+}
+
+
+.contact-card a{
+
+  color:#1678d2;
+
+  font-weight:700;
+
+  text-decoration:none;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  .teacher-card{
+    grid-template-columns:1fr;
+    gap:28px;
+    padding:20px;
+  }
+
+  .teacher-photo-wrap{
+    max-width:330px;
+    margin:0 auto;
+  }
+
+  .teacher-content{
+    width:100%;
+  }
+
+  .teacher-info-grid{
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+
+  .teacher-info-grid > div{
+    padding:14px;
+  }
+
+  .teacher-info-grid small{
+    font-size:12px;
+  }
+
+  .contact-cards{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+}
+
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+  .teacher-section{
+
+    padding:
+      48px
+      0;
+
+  }
+
+
+  .teacher-card{
+
+    border-radius:20px;
+
+  }
+
+
+  .teacher-photo{
+
+    border-radius:18px;
+
+  }
+
+
+  .teacher-badge{
+
+    font-size:12px;
+
+    left:12px;
+    right:12px;
+    bottom:12px;
+
+  }
+
+
+  .teacher-library-btn{
+
+    width:100%;
+
+    text-align:center;
+
+    box-sizing:border-box;
+
+  }
+
+}
+
+</style>
+
+
+<!-- EXISTING APP JS -->
+<script src="app.js"></script>
+
+</body>
+</html>
