@@ -96,7 +96,7 @@ footer{padding:25px 0;color:#748096;text-align:center;font-size:12px}
 
 <script>
 const EXAMS=[
-  ["Board Exams","🏫"],["JEE","🎯"],["NEET","🧬"],["NDA","📕"],["CUET","🎓"],["TET","📚"],["NET","📐"],["Other Competitive","🏆"]
+  ["Board Exams","🏫"],["JEE","🎯"],["NEET","🧬"],["NDA","📕"],["CUET","🎓"],["TET","📚"],["NET","📐"],["Other Competitive","🏆"],["School / General","📚"]
 ];
 
 const examGrid=document.getElementById("examGrid");
@@ -117,15 +117,43 @@ function val(r, keys){
   return "";
 }
 function examCategory(r){
-  const direct=val(r,["exam_category","examCategory","exam_type","category"]);
-  if(direct) return direct;
+  const direct=val(r,["exam_category","examCategory","exam_type"]);
+
+  // 1. Use the dedicated exam-category field only when
+  //    its value is one of the actual EXAMS categories.
+  if(direct){
+    const hit=EXAMS.find(([e])=>e.toLowerCase()===direct.toLowerCase());
+    if(hit) return hit[0];
+  }
+
+  // 2. Support old records where category itself stored
+  //    the exam category.
   const old=val(r,["category"]);
-  if(EXAMS.some(x=>x[0].toLowerCase()===old.toLowerCase())) return old;
-  const name=val(r,["exam_name","examName"]);
-  for(const [e] of EXAMS) if(name.toLowerCase().includes(e.toLowerCase())) return e;
-  return "";
+  if(old){
+    const hit=EXAMS.find(([e])=>e.toLowerCase()===old.toLowerCase());
+    if(hit) return hit[0];
+  }
+
+  // 3. Match exam name against known exam categories.
+  const name=val(r,["exam_name","examName","exam_type","exam_title"]);
+  if(name){
+    const hit=EXAMS.find(([e])=>name.toLowerCase().includes(e.toLowerCase()));
+    if(hit) return hit[0];
+  }
+
+  // 4. Legacy school resources:
+  //    Class + Board information means Board Exams.
+  const cls=val(r,["class_level","class_name","level"]);
+  const board=val(r,["board_exam_body","board","exam_body"]);
+
+  if(cls && board) return "Board Exams";
+
+  // 5. Unknown/non-competitive resources belong to School / General.
+  return "School / General";
 }
-function examName(r){ return val(r,["exam_name","examName","exam","exam_title"]) || examCategory(r) || "Other Competitive"; }
+function examName(r){
+  return val(r,["exam_name","examName","exam","exam_title"]) || examCategory(r) || "School / General";
+}
 function subject(r){ return val(r,["subject_category","subject","category"]) }
 function chapter(r){ return val(r,["chapter_topic","chapter","topic"]) }
 function materialType(r){ return val(r,["material_type","content_type","type"]) }
