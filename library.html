@@ -117,7 +117,7 @@ function val(r, keys){
   return "";
 }
 function examCategory(r){
-  const direct=val(r,["exam_category","examCategory","exam_type"]);
+  const direct=val(r,["exam_category","examCategory","exam_type","category"]);
   if(direct) return direct;
   const old=val(r,["category"]);
   if(EXAMS.some(x=>x[0].toLowerCase()===old.toLowerCase())) return old;
