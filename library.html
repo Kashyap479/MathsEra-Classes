@@ -147,7 +147,10 @@ function fillSelect(id, values){
 
 function renderExamCards(){
   examGrid.innerHTML=EXAMS.map(([name,icon])=>{
-    const n=allResources.filter(r=>examCategory(r).toLowerCase()===name.toLowerCase()).length;
+    const n=allResources.filter(r=>
+      examCategory(r).toLowerCase()===name.toLowerCase() ||
+      examName(r).toLowerCase()===name.toLowerCase()
+    ).length;
     return `<button class="exam-card" data-exam="${esc(name)}"><div class="exam-icon">${icon}</div><div class="exam-name">${esc(name)}</div><div class="exam-count">${n} ${n===1?"material":"materials"}</div></button>`;
   }).join("");
   document.querySelectorAll(".exam-card").forEach(card=>card.addEventListener("click",()=>openExam(card.dataset.exam)));
