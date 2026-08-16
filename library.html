@@ -173,12 +173,18 @@ function fillSelect(id, values){
   });
 }
 
+function resourcesForExam(name){
+  const key=String(name||"").trim().toLowerCase();
+  return allResources.filter(r=>{
+    const category=String(examCategory(r)||"").trim().toLowerCase();
+    const exam=String(examName(r)||"").trim().toLowerCase();
+    return category===key || exam===key;
+  });
+}
+
 function renderExamCards(){
   examGrid.innerHTML=EXAMS.map(([name,icon])=>{
-    const n=allResources.filter(r=>
-      examCategory(r).toLowerCase()===name.toLowerCase() ||
-      examName(r).toLowerCase()===name.toLowerCase()
-    ).length;
+    const n=resourcesForExam(name).length;
     return `<button class="exam-card" data-exam="${esc(name)}"><div class="exam-icon">${icon}</div><div class="exam-name">${esc(name)}</div><div class="exam-count">${n} ${n===1?"material":"materials"}</div></button>`;
   }).join("");
   document.querySelectorAll(".exam-card").forEach(card=>card.addEventListener("click",()=>openExam(card.dataset.exam)));
@@ -229,10 +235,7 @@ function filtered(){
 }
 
 function openExam(name){
-  const rows=allResources.filter(r=>
-    examCategory(r).toLowerCase()===name.toLowerCase() ||
-    examName(r).toLowerCase()===name.toLowerCase()
-  );
+  const rows=resourcesForExam(name);
 
   modalTitle.textContent=name+" Library";
   modalCount.textContent=rows.length;
