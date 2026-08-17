@@ -1,0 +1,12 @@
+MathsEra Classes — Edit Update Root-Cause Fix
+
+Root cause found by inspecting the actual project:
+- public.resources does NOT have an exam_name column.
+- admin.js was sending exam_name in the UPDATE row.
+- Supabase therefore rejected UPDATE with: Could not find the 'exam_name' column of 'resources' in the schema cache.
+
+Fix:
+- exam_name has been removed from the database UPDATE/INSERT payload.
+- Exam Name is already stored correctly inside the resource body JSON under taxonomy.examName, and parseResource() reads it from there.
+- No database migration is required for this fix.
+- No DELETE-related SQL changes are included/needed.

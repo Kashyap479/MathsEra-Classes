@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Posters & Advertisements | MathsEra Classes</title><meta name="description" content="MathsEra Classes — professional educational platform by Praveen Sir, Saharanpur.">
+<link rel="stylesheet" href="v10-public.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script src="cms.js"></script></head><body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png" alt="MathsEra Classes">
+      <span><b>MathsEra Classes</b><small>Building Strong Foundations for Success</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a><a href="courses.html">Courses</a><a href="batches.html">Batches</a>
+      <a href="fees.html">Fees</a><a href="library.html">Study Material</a><a href="results.html">Results</a>
+      <a href="events.html">Events</a><a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a><a href="courses.html">Courses</a><a href="batches.html">Batches</a>
+    <a href="fees.html">Fees</a><a href="library.html">Study Material</a><a href="results.html">Results</a>
+    <a href="events.html">Events</a><a href="announcements.html">Announcements</a>
+    <a href="posters.html">Posters</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
+  </div>
+</header>
+<main class="page"><div class="container">
+<section class="hero"><div class="eyebrow">MATHSERA UPDATES</div><h1>Posters, admissions & promotions.</h1><p>Official MathsEra batch, course, result, test-series and event posters are displayed here.</p></section>
+<section class="section"><div id="posters" class="poster-archive"><div class="empty">Loading posters…</div></div></section>
+<style>
+.poster-archive{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.poster-archive .card{padding:0;overflow:hidden}
+.poster-archive .poster{display:block;width:100%;aspect-ratio:8/3;object-fit:cover;border-radius:0}
+.poster-archive .poster-info{padding:17px}
+@media(max-width:650px){.poster-archive{grid-template-columns:1fr}.poster-archive .poster{aspect-ratio:8/5}}
+</style>
+<script>
+(async()=>{try{
+ const rows=await mathseraCMS.published('posters');
+ const el=document.getElementById('posters');
+ el.innerHTML=rows.length?rows.map(x=>{
+   const m=mathseraCMS.posterMeta(x);
+   const text=m.text||"";
+   return `<article class="card">${x.image_url?`<picture>${m.mobileImage?`<source media="(max-width:650px)" srcset="${mathseraCMS.esc(m.mobileImage)}">`:''}<img class="poster" src="${mathseraCMS.esc(x.image_url)}" alt="${mathseraCMS.esc(x.title)}" loading="lazy"></picture>`:''}<div class="poster-info"><h3>${mathseraCMS.esc(x.title)}</h3>${text?`<p class="muted">${mathseraCMS.esc(text)}</p>`:''}${x.button_url?`<div class="btn-row"><a class="btn" href="${mathseraCMS.esc(x.button_url)}" target="_blank" rel="noopener">${mathseraCMS.esc(x.button_text||'View Details')}</a></div>`:''}</div></article>`;
+ }).join(''):'<div class="empty">Published posters will appear here.</div>';
+}catch(e){console.error(e);document.getElementById('posters').innerHTML='<div class="empty">Posters are temporarily unavailable.</div>'}})();
+</script></div></main>
+<footer><div class="container footer-grid"><div><b>MathsEra Classes</b><p class="muted" style="color:#b9c7da">Mathematics-first learning platform for students, solutions, courses, tests, results and educational updates.</p></div><div class="footer-links"><b>Learning</b><a href="library.html">Study Material</a><a href="courses.html">Courses</a><a href="fees.html">Fees</a><a href="results.html">Results</a></div><div class="footer-links"><b>Connect</b><a href="events.html">Events</a><a href="announcements.html">Announcements</a><a href="posters.html">Posters</a><a href="contact.html">Contact</a></div></div><div class="container footer-bottom">© <span id="yr"></span> MathsEra Classes · Student information is public; content management is restricted to the authorised admin.</div></footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();document.getElementById('menuBtn')?.addEventListener('click',()=>document.getElementById('mobileNav').classList.toggle('open'));</script></body></html>

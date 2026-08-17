@@ -1,0 +1,13 @@
+MathsEra Classes — EDIT UPDATE SINGLE-RESULT ROOT FIX
+
+Root cause:
+The Edit save code used UPDATE ... select("id").single(). If PostgREST returned zero rows, the client raised "Cannot coerce the result to a single JSON object" before the app could verify the update.
+
+Fix:
+- Removed .single() from the UPDATE path.
+- Treat returned rows as an array.
+- Verify the resource when no row is returned.
+- Show a useful authorization/not-found message instead of the misleading JSON-object error.
+- Cache-busted solution-admin.html so the browser loads the patched admin.js.
+
+No Supabase SQL change is required for this client-side fix.

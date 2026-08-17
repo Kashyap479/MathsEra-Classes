@@ -1,158 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MathsEra Admin | Content Library</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MathsEra Admin | Professional CMS</title>
 <link rel="stylesheet" href="styles.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:#f4f7fb;color:#162033}
-.top{background:#0d1b36;color:#fff;box-shadow:0 2px 14px rgba(0,0,0,.12)}
-.nav{max-width:1100px;margin:auto;min-height:68px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}.mark{width:42px;height:42px;border-radius:12px;background:#1688ff;display:grid;place-items:center;font-weight:800}.brand b{display:block}.brand small{display:block;opacity:.7;font-size:11px}
-.nav a{color:#fff;text-decoration:none;font-size:14px}
-.wrap{max-width:1050px;margin:28px auto;padding:0 14px 50px}.panel{background:#fff;border:1px solid #e5eaf1;border-radius:18px;padding:24px;margin-bottom:22px;box-shadow:0 8px 28px rgba(25,45,80,.07)}
-#loginPanel{max-width:560px;margin:55px auto}.eyebrow{font-size:11px;letter-spacing:1.5px;font-weight:800;color:#1688ff;margin:0 0 7px}.muted{color:#667085;font-size:14px;line-height:1.55}h1{font-size:30px;margin:0 0 8px}h2{font-size:22px;margin:0}
-label{display:block;font-size:13px;font-weight:750;color:#344054;margin-bottom:15px}
-input,select,textarea{width:100%;margin-top:7px;padding:12px 13px;border:1px solid #d6dce6;border-radius:10px;background:#fff;color:#162033;font:inherit;outline:none}
-input:focus,select:focus,textarea:focus{border-color:#1688ff;box-shadow:0 0 0 3px rgba(22,136,255,.11)}textarea{min-height:82px;resize:vertical}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-button{border:0;border-radius:9px;padding:11px 16px;font-weight:800;cursor:pointer}.primary{background:#1688ff;color:#fff}.danger{background:#e74c3c;color:#fff}.secondary{background:#e9eef5;color:#243247}.primary:disabled{opacity:.6;cursor:not-allowed}
-.filebox{border:1px dashed #b8c5d8;background:#f8fbff;padding:15px;border-radius:12px}.filehint{font-size:12px;color:#667085;margin-top:7px}
-.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.preview img{width:78px;height:78px;object-fit:cover;border-radius:9px;border:1px solid #dce3ed}
-.status{margin-top:12px;padding:10px 12px;border-radius:9px;background:#f4f7fb;min-height:18px}.success{color:#087443}.error{color:#b42318}
-.info-box{background:#eef7ff;border:1px solid #cfe7ff;border-radius:12px;padding:13px 15px;font-size:13px;line-height:1.55;margin-bottom:18px}
-.item{display:flex;gap:14px;padding:15px 0;border-top:1px solid #edf0f4;align-items:flex-start}.item:first-child{border-top:0}.item img{width:105px;height:82px;object-fit:cover;border-radius:9px;border:1px solid #e2e7ee}.item-main{flex:1}.item-title{font-weight:800;font-size:16px;margin-bottom:5px}.item-meta{font-size:13px;color:#667085;line-height:1.55}
-@media(max-width:700px){.nav{padding:0 12px}.wrap{margin:16px auto;padding:0 9px 35px}.panel{padding:18px;border-radius:15px}.grid2,.grid3{grid-template-columns:1fr;gap:0}h1{font-size:26px}.item{gap:10px}.item img{width:88px;height:70px}}
-</style>
-</head>
-<body>
-<header class="top">
-  <div class="nav">
-    <a class="brand" href="index.html"><span class="mark">ME</span><span><b>MathsEra Admin</b><small>Universal Content Publisher</small></span></a>
-    <div><a href="library.html">View Library</a> <button id="logoutBtn" class="danger" style="display:none;margin-left:8px">Logout</button></div>
-  </div>
-</header>
-
-<main class="wrap">
-  <section class="panel" id="loginPanel">
-    <p class="eyebrow">SECURE ADMIN ACCESS</p><h1>Admin Login</h1>
-    <p class="muted">MathsEra Classes content publish करने के लिए login करें.</p>
-    <form id="loginForm">
-      <label>Email<input id="loginEmail" type="email" autocomplete="username" required></label>
-      <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required></label>
-      <button id="loginBtn" class="primary" type="submit">LOGIN</button>
-      <div id="loginMessage" class="status"></div>
-    </form>
-  </section>
-
-  <section id="dashboard" style="display:none">
-    <div class="panel">
-      <p class="eyebrow">UNIVERSAL LEARNING LIBRARY</p>
-      <h1>Publish New Material</h1>
-      <p class="muted">Board Exams, JEE, NEET, NDA, NET और future competitive exams — सबका material यहीं से publish करें.</p>
-
-      <div class="info-box">
-        <b>Multiple pages supported:</b> एक Notes/PYQ/Solution के लिए एक साथ कई images select कर सकते हैं. Images public MathsEra Library में gallery के रूप में दिखाई जाएँगी.
-      </div>
-
-      <form id="materialForm">
-        <div class="grid2">
-          <label>Exam Category
-            <select id="examCategory" required>
-              <option value="Board Exams">Board Exams</option>
-              <option value="JEE">JEE</option>
-              <option value="NEET">NEET</option>
-              <option value="NDA">NDA</option>
-              <option value="NET">NET</option>
-              <option value="CUET">CUET</option>
-              <option value="TET">TET</option>
-              <option value="Other Competitive">Other Competitive</option>
-              <option value="School / General">School / General</option>
-            </select>
-          </label>
-          <label>Exam Name
-            <input id="examName" placeholder="JEE Main 2026 / CBSE Class 10">
-          </label>
-        </div>
-
-        <div class="grid3">
-          <label>Class / Level
-            <select id="className">
-              <option value="">All Classes / Level</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>Graduation</option><option>PG</option>
-            </select>
-          </label>
-          <label>Board / Exam Body
-            <input id="board" placeholder="CBSE / UP Board / NTA / UGC">
-          </label>
-          <label>Year
-            <input id="examYear" type="number" min="2000" max="2100" placeholder="2026">
-          </label>
-        </div>
-
-        <div class="grid2">
-          <label>Subject / Category
-            <input id="category" placeholder="Mathematics / Physics / Biology" required>
-          </label>
-          <label>Material Type
-            <select id="contentType" required>
-              <option>Notes</option><option>Solution</option><option>PYQ</option><option>Syllabus</option><option>Exam Pattern</option><option>Important Questions</option><option>Formula Sheet</option><option>Practice Set</option><option>Study Material</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="grid2">
-          <label>Chapter / Topic
-            <input id="chapter" placeholder="Quadratic Equations / Current Electricity / Trigonometry">
-          </label>
-          <label>Exercise / Paper / Set
-            <input id="exercise" placeholder="4.2 / Paper 2025 / Set A">
-          </label>
-        </div>
-
-        <div class="grid2">
-          <label>Question No. (optional)
-            <input id="questionNumber" placeholder="Q. 5">
-          </label>
-          <label>Language
-            <select id="language"><option>English</option><option>Hindi</option><option>Hinglish</option></select>
-          </label>
-        </div>
-
-        <label>Question / SEO Title
-          <textarea id="title" placeholder="JEE Main 2026 Mathematics — Quadratic Equations PYQ Solutions" required></textarea>
-        </label>
-
-        <label>Explanation / Description
-          <textarea id="body" placeholder="Short explanation, keywords, important points..."></textarea>
-        </label>
-
-        <label class="filebox">Solution / Notes Images — <b>multiple selection allowed</b>
-          <input id="images" type="file" accept="image/*" multiple>
-          <div class="filehint">JPG, PNG, WEBP etc. एक साथ कई pages select कर सकते हैं.</div>
-          <div id="imagePreview" class="preview"></div>
-        </label>
-
-        <label class="filebox">Optional PDF
-          <input id="pdf" type="file" accept="application/pdf">
-          <div class="filehint">अगर पूरा Notes/PYQ PDF है तो यहाँ upload करें.</div>
-        </label>
-
-        <button id="publishBtn" class="primary" type="submit">PUBLISH MATERIAL</button>
-        <button id="clearBtn" class="secondary" type="button" style="margin-left:6px">CLEAR</button>
-        <div id="publishMessage" class="status"></div>
-      </form>
-    </div>
-
-    <div class="panel">
-      <p class="eyebrow">ONLINE LIBRARY</p><h2>Recently Published Material</h2>
-      <div id="list"><p class="muted">Loading...</p></div>
-    </div>
-  </section>
-</main>
-<script src="admin.js?v=21"></script>
-</body>
-</html>
+body{background:#f4f7fb;color:#172033;margin:0;font-family:Inter,system-ui,sans-serif}.admin-wrap{max-width:1150px;margin:auto;padding:24px 14px 60px}.top-admin{background:#071936;color:#fff}.top-admin .inner{max-width:1150px;margin:auto;min-height:66px;padding:0 14px;display:flex;align-items:center;justify-content:space-between}.panel{background:#fff;border:1px solid #e1e8f1;border-radius:18px;padding:20px;margin-bottom:18px;box-shadow:0 8px 28px #0a234012}.tabs{display:flex;gap:8px;overflow:auto;padding-bottom:4px}.tabs button{border:1px solid #dbe3ed;background:#fff;border-radius:10px;padding:10px 13px;font-weight:800;white-space:nowrap;cursor:pointer}.tabs button.active{background:#1683ff;color:#fff;border-color:#1683ff}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:800;color:#4f6077}.field input,.field textarea,.field select{width:100%;padding:11px;border:1px solid #dbe3ed;border-radius:10px;font:inherit}.field textarea{min-height:90px;resize:vertical}.media-field{background:#f8fbff;border:1px dashed #b8cbe3;border-radius:14px;padding:14px}.media-input{padding:10px!important;background:#fff;cursor:pointer}.media-help{font-size:12px;color:#66758b;line-height:1.5}.media-preview{margin-top:10px}.selected-count{font-size:12px;font-weight:900;color:#1683ff;margin-bottom:8px}.preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}.preview-item{position:relative;border:1px solid #dbe3ed;border-radius:12px;background:#fff;padding:6px;overflow:hidden}.preview-item img{width:100%;height:100px;object-fit:cover;border-radius:8px;display:block}.preview-item span{display:block;font-size:10px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#4f6077}.remove-file{position:absolute;right:8px;top:8px;border:0;border-radius:50%;width:26px;height:26px;background:#dc3545;color:#fff;font-weight:900;cursor:pointer}.media-note{margin-top:9px;font-size:11px;color:#5b6b80;background:#eef5ff;padding:8px 10px;border-radius:9px}.current-media{margin-top:10px;font-size:12px;color:#4f6077;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.current-media a{font-weight:800;color:#1683ff}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}.primary{background:#1683ff;color:#fff}.secondary{background:#eaf0f8;color:#173252}.danger{background:#dc3545;color:#fff}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:760px}.table th,.table td{padding:10px;border-bottom:1px solid #e8edf3;text-align:left;font-size:13px}.status{padding:10px;border-radius:10px;margin-top:10px}.ok{background:#ecfdf3;color:#18794e}.bad{background:#fff1f1;color:#a43a3a}.hidden{display:none!important}.kicker{font-size:11px;letter-spacing:1.5px;color:#1683ff;font-weight:900}.login{max-width:500px;margin:70px auto}.note{font-size:12px;color:#66758b;line-height:1.6}
+@media(max-width:650px){.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+</style></head><body>
+<header class="top-admin"><div class="inner"><b>🔐 MathsEra Classes Admin</b><div><a href="solution-admin.html" style="color:#fff;margin-right:12px">Solution Editor</a><a href="index.html" style="color:#fff;margin-right:12px">View Website</a><button id="logout" class="btn danger hidden">Logout</button></div></div></header>
+<main class="admin-wrap">
+<section id="loginPanel" class="panel login"><div class="kicker">OWNER ACCESS</div><h1>Admin Login</h1><p class="note">Only the authorised MathsEra admin account can manage or publish website content.</p>
+<form id="loginForm"><div class="field"><label>Email</label><input id="email" type="email" autocomplete="username" required></div><div class="field" style="margin-top:10px"><label>Password</label><input id="password" type="password" autocomplete="current-password" required></div><div class="actions"><button class="btn primary">Login Securely</button></div></form><div id="loginMsg"></div></section>
+<section id="app" class="hidden">
+<div class="panel"><div class="kicker">CONTROL CENTRE</div><h1 style="margin:5px 0">MathsEra Content Dashboard</h1><p class="note">Students can only see published content. Posters/Ads include homepage placement, display order, swipe carousel, auto-slide and optional mobile artwork. No extra SQL is required for these controls.</p>
+<div class="tabs" id="tabs"></div></div>
+<div class="panel"><div id="editor"></div></div>
+<div class="panel"><h2 style="margin-top:0">Existing Records</h2><div class="table-wrap"><table class="table"><thead><tr><th>Title / Name</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+</section></main>
+<script src="admin-v11.js?v=20260816-1025"></script></body></html>

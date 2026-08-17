@@ -1,0 +1,31 @@
+MATHSERA CLASSES — LIBRARY FILTER ROOT FIX
+===============================================
+
+Root cause fixed:
+Board Exam records were allowed to have different examName values such as
+"CBSE" and "CBSE Class 11". The Library's exam filter used exact matching,
+so selecting CBSE could hide valid Class 11 resources.
+
+Permanent frontend fix:
+1. Board Exams now use the board name itself as the canonical exam identity.
+   Example: CBSE.
+2. Class remains a separate filter.
+3. The Exam filter is populated from the canonical board identity for Board
+   Exams, preventing legacy taxonomy differences from splitting records.
+4. Library cache key was bumped so an older cached snapshot cannot preserve
+   the previous filtering behavior.
+5. library.js script version was bumped.
+
+Important:
+The database records are NOT deleted or rewritten by this frontend fix.
+
+Expected result for:
+Board Exams -> CBSE -> 11 -> Mathematics -> NCERT -> Exercise Solutions
+
+Resources whose category is Board Exams and whose other fields match will now
+appear together. A record categorized as School / General will correctly remain
+outside the Board Exams category.
+
+Files changed:
+- library.js
+- library.html

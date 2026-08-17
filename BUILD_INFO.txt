@@ -1,0 +1,7 @@
+MathsEra Classes — Library Delete Root-Cause Fix
+Build: V13 DELETE FINAL ROOT-CAUSE FIX
+Root cause fixed: PostgreSQL ROW_COUNT was assigned directly to a boolean.
+Delete RPC now uses DELETE ... RETURNING id and returns a true/false result reliably.
+PostgREST schema reload is included.
+
+2026-08-17 EDIT UPDATE SINGLE-RESULT ROOT FIX: removed .single() from resource UPDATE, added array result + verification, and cache-busted solution-admin.js.

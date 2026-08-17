@@ -7,7 +7,11 @@ window.MATHSERA_SUPABASE_URL = SUPABASE_URL;
 window.MATHSERA_SUPABASE_PUBLISHABLE_KEY = SUPABASE_PUBLISHABLE_KEY;
 
 // Shared client used by Admin and other pages.
-window.supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
+if (window.supabase && typeof window.supabase.createClient === "function") {
+  window.supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+} else {
+  window.supabaseClient = null;
+}

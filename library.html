@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#06152f">
 <title>MathsEra Universal Learning Library</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <style>
 *{box-sizing:border-box}
@@ -18,7 +17,7 @@ a{text-decoration:none;color:inherit}
 .brand img{width:38px;height:38px;object-fit:contain;border-radius:8px}
 .brand b{display:block;font-size:14px}.brand small{display:block;color:#a9b8d1;font-size:9px}
 .desktop-nav{display:flex;gap:18px;font-size:13px}.desktop-nav a:hover{color:#66b2ff}
-.menu-btn{display:none;background:none;border:0;color:#fff;font-size:25px}
+.menu-btn{display:none;background:none;border:0;color:#fff;font-size:25px}.mobile-nav{display:none;background:#071936;border-top:1px solid #ffffff18;padding:10px 14px}.mobile-nav.open{display:grid;gap:8px}.mobile-nav a{color:#fff;text-decoration:none;padding:9px 6px;border-radius:8px}
 .hero{margin:28px 0 35px;background:linear-gradient(135deg,#092451,#0b2f68);color:#fff;border-radius:24px;padding:34px 25px;box-shadow:0 18px 45px #09245125}
 .eyebrow{font-size:10px;letter-spacing:2px;font-weight:800;color:#8dc4ff}
 .hero h1{font-size:clamp(32px,7vw,58px);margin:8px 0 8px;line-height:1.02;font-weight:800}
@@ -33,7 +32,10 @@ a{text-decoration:none;color:inherit}
 .filter-card{margin:38px 0 22px;background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:20px;box-shadow:0 8px 25px #0a234012}
 .filter-card h2{margin:0 0 15px;font-size:25px}.filters{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.filters input,.filters select{width:100%;padding:12px;border:1px solid #dbe2ec;border-radius:11px;background:#fff;font:inherit}.filter-actions{display:flex;gap:9px;margin-top:12px}.clear{background:#e9eef6;color:#172944}
 .results{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:60px}.resource{background:#fff;border:1px solid #e2e8f0;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #0a234012}.resource img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#edf2f8}.resource-body{padding:17px}.resource-type{font-size:10px;letter-spacing:1.4px;font-weight:800;color:#3975c2;text-transform:uppercase}.resource h3{font-size:18px;margin:7px 0 9px}.tags{display:flex;gap:6px;flex-wrap:wrap}.tag{font-size:11px;background:#edf4ff;color:#315b90;padding:5px 8px;border-radius:999px}.resource p{color:#66758b;line-height:1.5;font-size:13px}.empty,.error{background:#fff;border:1px solid #e5eaf2;border-radius:18px;padding:30px;text-align:center;color:#66758b;grid-column:1/-1}.error{background:#fff3f3;color:#a43a3a;border-color:#ffd2d2}
-.modal{display:none;position:fixed;inset:0;background:#06152fcc;z-index:100;padding:18px;overflow:auto}.modal.open{display:flex;align-items:center;justify-content:center}.modal-box{width:min(900px,100%);max-height:92vh;overflow:auto;background:#f5f8fc;border-radius:22px;box-shadow:0 25px 80px #0008}.modal-head{position:sticky;top:0;z-index:2;background:#fff;padding:18px 20px;border-bottom:1px solid #e4e9f1;display:flex;justify-content:space-between;align-items:center}.modal-head h2{margin:0;font-size:24px}.close{width:38px;height:38px;border:0;border-radius:50%;background:#e9eef6;font-size:22px;cursor:pointer}.modal-content{padding:20px}.modal-summary{background:#fff;border:1px solid #e3e9f1;border-radius:17px;padding:22px;text-align:center;margin-bottom:16px}.modal-number{font-size:42px;font-weight:800;color:#1683ff}.modal-label{font-weight:700;color:#61708a}.modal-resources{display:grid;grid-template-columns:1fr;gap:14px}.modal-library-head{background:#fff;border:1px solid #e3e9f1;border-radius:17px;padding:16px}.modal-library-head p{margin:0 0 12px;color:#61708a}.ready-sections{display:flex;flex-wrap:wrap;gap:8px}.section-pill,.ready-sections span{border:1px solid #dbe4f0;background:#f4f8fd;color:#244c82;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:700}.section-pill{cursor:pointer}.category-block{background:#fff;border:1px solid #e3e9f1;border-radius:17px;padding:15px}.category-title{display:flex;align-items:center;gap:9px;margin-bottom:10px}.category-title span{font-size:20px}.category-title b{font-size:16px}.category-title small{margin-left:auto;background:#edf4ff;color:#1683ff;border-radius:999px;padding:4px 8px;font-weight:800}.category-items{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.category-empty{background:#f7f9fc;border-radius:11px;padding:12px;color:#7b8798;font-size:13px}.library-empty{background:#fff;border:1px solid #e3e9f1;border-radius:17px;padding:25px;text-align:center}.empty-icon{font-size:48px}.library-empty h3{margin:8px 0}.library-empty p{color:#61708a}.library-empty .ready-sections{justify-content:center;margin-top:15px}.mini{display:block}.backtop{margin-top:15px}
+.modal{display:none;position:fixed;inset:0;background:#06152fcc;z-index:100;padding:18px;overflow:auto}.modal.open{display:flex;align-items:center;justify-content:center}.modal-box{width:min(900px,100%);max-height:92vh;overflow:auto;background:#f5f8fc;border-radius:22px;box-shadow:0 25px 80px #0008}.modal-head{position:sticky;top:0;z-index:2;background:#fff;padding:18px 20px;border-bottom:1px solid #e4e9f1;display:flex;justify-content:space-between;align-items:center}.modal-head h2{margin:0;font-size:24px}.close{width:38px;height:38px;border:0;border-radius:50%;background:#e9eef6;font-size:22px;cursor:pointer}.modal-content{padding:20px}.modal-summary{background:#fff;border:1px solid #e3e9f1;border-radius:17px;padding:22px;text-align:center;margin-bottom:16px}.modal-number{font-size:42px;font-weight:800;color:#1683ff}.modal-label{font-weight:700;color:#61708a}.modal-resources{display:grid;grid-template-columns:1fr;gap:14px}.modal-library-head{background:#fff;border:1px solid #e3e9f1;border-radius:17px;padding:16px}.modal-library-head p{margin:0 0 12px;color:#61708a}.ready-sections{display:flex;flex-wrap:wrap;gap:8px}.section-pill,.ready-sections span{border:1px solid #dbe4f0;background:#f4f8fd;color:#244c82;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:700}.section-pill{cursor:pointer}.category-block{background:#fff;border:1px solid #e3e9f1;border-radius:17px;padding:15px}.category-title{display:flex;align-items:center;gap:9px;margin-bottom:10px}.category-title span{font-size:20px}.category-title b{font-size:16px}.category-title small{margin-left:auto;background:#edf4ff;color:#1683ff;border-radius:999px;padding:4px 8px;font-weight:800}.category-items{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.category-empty{background:#f7f9fc;border-radius:11px;padding:12px;color:#7b8798;font-size:13px}.library-empty{background:#fff;border:1px solid #e3e9f1;border-radius:17px;padding:25px;text-align:center}.empty-icon{font-size:48px}.library-empty h3{margin:8px 0}.library-empty p{color:#61708a}.library-empty .ready-sections{justify-content:center;margin-top:15px}.mini{display:block}.backtop.library-group{width:100%;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e3e9f1;border-radius:15px;padding:15px;text-align:left;cursor:pointer;transition:.15s}.library-group:hover{border-color:#1683ff;transform:translateY(-1px)}.library-group-main{min-width:0;display:flex;flex-direction:column;gap:4px}.library-group-main b{font-size:16px;color:#162a49}.library-group-main small{color:#6c7a8e}.library-group-main span{font-size:12px;color:#3975c2}.library-group>strong{margin-left:auto;background:#edf4ff;color:#1683ff;border-radius:999px;padding:6px 10px}.library-groups{display:grid;gap:10px}.resource{display:block;color:inherit}.resource:hover{border-color:#1683ff;transform:translateY(-2px)}
+.subject-block{background:#fff;border:1px solid #e3e9f1;border-radius:17px;padding:15px}.subject-head{display:flex;align-items:center;gap:10px;margin-bottom:11px}.subject-head b{font-size:17px}.subject-head small{margin-left:auto;background:#edf4ff;color:#1683ff;border-radius:999px;padding:4px 8px;font-weight:800}.publication-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.publication-card{display:flex;align-items:center;gap:10px;width:100%;background:#f8fbff;border:1px solid #dfe8f4;border-radius:13px;padding:13px;text-align:left;cursor:pointer}.publication-card:hover{border-color:#1683ff;background:#f3f8ff}.publication-card .pub-icon{font-size:22px}.publication-card .pub-main{min-width:0}.publication-card .pub-main b{display:block;color:#183253}.publication-card .pub-main small{color:#68788d}.publication-card strong{margin-left:auto;background:#edf4ff;color:#1683ff;border-radius:999px;padding:5px 8px}
+.smart-section{background:#fff;border:1px solid #e3e9f1;border-radius:18px;padding:16px;margin-top:14px}.smart-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.smart-section-head b{display:block;font-size:16px;color:#162a49}.smart-section-head small{display:block;color:#718096;margin-top:3px}.smart-section-head>span{background:#edf4ff;color:#1683ff;border-radius:999px;padding:5px 9px;font-weight:800}.smart-card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.smart-card{display:flex;align-items:center;gap:11px;text-align:left;background:#f8fbff;border:1px solid #dfe8f4;border-radius:15px;padding:14px;cursor:pointer;transition:.15s}.smart-card:hover{border-color:#1683ff;transform:translateY(-1px);box-shadow:0 7px 18px #0a234012}.smart-card>span{font-size:24px}.smart-card b{display:block;color:#183253}.smart-card small{display:block;color:#68788d;margin-top:3px}.smart-card small,.smart-card b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.library-breadcrumb{display:flex;align-items:flex-start;gap:12px}.library-back{border:1px solid #d9e3ef;background:#f5f8fc;color:#244c82;border-radius:10px;padding:8px 11px;font-weight:800;cursor:pointer;white-space:nowrap}.crumb-label{font-size:16px;font-weight:800;color:#183253;margin-bottom:4px}.resource-link{display:block;padding:12px;border:1px solid #e5ebf3;border-radius:12px;background:#fbfdff;text-decoration:none;color:inherit}.resource-link:hover{border-color:#1683ff;background:#f5f9ff}
+@media(max-width:700px){.publication-grid,.smart-card-grid{grid-template-columns:1fr}}
 footer{padding:25px 0;color:#748096;text-align:center;font-size:12px}
 @media(max-width:700px){.desktop-nav{display:none}.menu-btn{display:block}.hero{padding:28px 18px}.search-row{flex-direction:column}.exam-grid,.results,.modal-resources{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.category-items{grid-template-columns:1fr}.section-title{align-items:flex-start;flex-direction:column;gap:6px}.modal{padding:8px}.modal-box{max-height:96vh}}
 </style>
@@ -41,10 +43,11 @@ footer{padding:25px 0;color:#748096;text-align:center;font-size:12px}
 <body>
 <header class="topbar">
   <div class="container nav">
-    <a class="brand" href="index.html"><img src="mathsera-logo.png" alt="MathsEra Classes"><span><b>MathsEra Classes</b><small>Building Strong Foundations for Success</small></span></a>
+    <a class="brand" href="index.html"><img src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png" onerror="this.style.display='none'" alt="MathsEra Classes"><span><b>MathsEra Classes</b><small>Building Strong Foundations for Success</small></span></a>
     <nav class="desktop-nav"><a href="index.html">Home</a><a href="library.html">Library</a><a href="admin.html">🔐 Admin</a></nav>
-    <button class="menu-btn" id="menuBtn">☰</button>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
   </div>
+  <div class="mobile-nav" id="mobileNav"><a href="index.html">🏠 Home</a><a href="library.html">📚 Library</a><a href="admin.html">🔐 Admin</a></div>
 </header>
 
 <main class="container">
@@ -70,6 +73,7 @@ footer{padding:25px 0;color:#748096;text-align:center;font-size:12px}
     <select id="boardFilter"><option value="">All Boards / Exam Bodies</option></select>
     <select id="classFilter"><option value="">All Classes / Levels</option></select>
     <select id="subjectFilter"><option value="">All Subjects</option></select>
+    <select id="publicationFilter"><option value="">All Publications / Books</option></select>
     <select id="typeFilter"><option value="">All Material Types</option></select>
     <select id="yearFilter"><option value="">All Years</option></select>
     <select id="chapterFilter"><option value="">All Chapters / Topics</option></select>
@@ -94,269 +98,6 @@ footer{padding:25px 0;color:#748096;text-align:center;font-size:12px}
 
 <footer>© <span id="year"></span> MathsEra Classes. All rights reserved.</footer>
 
-<script>
-const EXAMS=[
-  ["Board Exams","🏫"],["JEE","🎯"],["NEET","🧬"],["NDA","📕"],["CUET","🎓"],["TET","📚"],["NET","📐"],["Other Competitive","🏆"],["School / General","📚"]
-];
-
-const examGrid=document.getElementById("examGrid");
-const results=document.getElementById("results");
-const publishedCount=document.getElementById("publishedCount");
-const resultCount=document.getElementById("resultCount");
-const examModal=document.getElementById("examModal");
-const modalTitle=document.getElementById("modalTitle");
-const modalCount=document.getElementById("modalCount");
-const modalResources=document.getElementById("modalResources");
-let client=null, allResources=[];
-
-function esc(v){
-  return String(v ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-}
-function val(r, keys){
-  for(const k of keys){ if(r && r[k]!==undefined && r[k]!==null && String(r[k]).trim()!=="") return String(r[k]).trim(); }
-  return "";
-}
-function examCategory(r){
-  const direct=val(r,["exam_category","examCategory","exam_type"]);
-
-  // 1. Use the dedicated exam-category field only when
-  //    its value is one of the actual EXAMS categories.
-  if(direct){
-    const hit=EXAMS.find(([e])=>e.toLowerCase()===direct.toLowerCase());
-    if(hit) return hit[0];
-  }
-
-  // 2. Support old records where category itself stored
-  //    the exam category.
-  const old=val(r,["category"]);
-  if(old){
-    const hit=EXAMS.find(([e])=>e.toLowerCase()===old.toLowerCase());
-    if(hit) return hit[0];
-  }
-
-  // 3. Match exam name against known exam categories.
-  const name=val(r,["exam_name","examName","exam_type","exam_title"]);
-  if(name){
-    const hit=EXAMS.find(([e])=>name.toLowerCase().includes(e.toLowerCase()));
-    if(hit) return hit[0];
-  }
-
-  // 4. Legacy school resources:
-  //    Class + Board information means Board Exams.
-  const cls=val(r,["class_level","class_name","level"]);
-  const board=val(r,["board_exam_body","board","exam_body"]);
-
-  if(cls && board) return "Board Exams";
-
-  // 5. Unknown/non-competitive resources belong to School / General.
-  return "School / General";
-}
-function examName(r){
-  return val(r,["exam_name","examName","exam","exam_title"]) || examCategory(r) || "School / General";
-}
-function subject(r){ return val(r,["subject_category","subject","category"]) }
-function chapter(r){ return val(r,["chapter_topic","chapter","topic"]) }
-function materialType(r){ return val(r,["material_type","content_type","type"]) }
-function classLevel(r){ return val(r,["class_level","class_name","level"]) }
-function board(r){ return val(r,["board_exam_body","board","exam_body"]) }
-function year(r){ return val(r,["year","exam_year"]) }
-function title(r){ return val(r,["title","seo_title","question_title"]) || "MathsEra Resource" }
-function body(r){ return val(r,["description","body","explanation"]) }
-
-function fillSelect(id, values){
-  const s=document.getElementById(id); if(!s) return;
-  const first=s.options[0] ? s.options[0].textContent : "";
-  s.innerHTML="";
-  const base=document.createElement("option"); base.value=""; base.textContent=first; s.appendChild(base);
-  [...new Set(values.filter(Boolean))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true})).forEach(v=>{
-    const o=document.createElement("option");o.value=v;o.textContent=v;s.appendChild(o);
-  });
-}
-
-function resourcesForExam(name){
-  const key=String(name||"").trim().toLowerCase();
-  return allResources.filter(r=>{
-    const category=String(examCategory(r)||"").trim().toLowerCase();
-    const exam=String(examName(r)||"").trim().toLowerCase();
-    return category===key || exam===key;
-  });
-}
-
-function renderExamCards(){
-  examGrid.innerHTML=EXAMS.map(([name,icon])=>{
-    const n=resourcesForExam(name).length;
-    return `<button class="exam-card" data-exam="${esc(name)}"><div class="exam-icon">${icon}</div><div class="exam-name">${esc(name)}</div><div class="exam-count">${n} ${n===1?"material":"materials"}</div></button>`;
-  }).join("");
-  document.querySelectorAll(".exam-card").forEach(card=>card.addEventListener("click",()=>openExam(card.dataset.exam)));
-  publishedCount.textContent=`${allResources.length} published ${allResources.length===1?"material":"materials"}`;
-}
-
-function resourceCard(r){
-  let img=val(r,["image_url","solution_image","thumbnail_url"]);
-  if(!img && Array.isArray(r.image_urls) && r.image_urls.length) img=r.image_urls[0];
-  return `<article class="resource">
-    ${img?`<img src="${esc(img)}" alt="${esc(title(r))}" loading="lazy">`:""}
-    <div class="resource-body">
-      <div class="resource-type">${esc(materialType(r)||"RESOURCE")}</div>
-      <h3>${esc(title(r))}</h3>
-      <div class="tags">${[examCategory(r),examName(r),classLevel(r)?`Class/Level ${classLevel(r)}`:"",board(r),subject(r),chapter(r),year(r)].filter(Boolean).map(x=>`<span class="tag">${esc(x)}</span>`).join("")}</div>
-      ${body(r)?`<p>${esc(body(r).slice(0,220))}${body(r).length>220?"...":""}</p>`:""}
-    </div>
-  </article>`;
-}
-
-function renderResults(rows=allResources){
-  resultCount.textContent=`${rows.length} ${rows.length===1?"resource":"resources"}`;
-  results.innerHTML=rows.length ? rows.map(resourceCard).join("") : `<div class="empty"><div style="font-size:38px">🔎</div><h3>No content found</h3><p>Try another filter or search.</p></div>`;
-}
-
-function filtered(){
-  const q=document.getElementById("globalSearch").value.trim().toLowerCase();
-  const category=document.getElementById("categoryFilter").value.toLowerCase();
-  const exam=document.getElementById("examFilter").value.toLowerCase();
-  const b=document.getElementById("boardFilter").value.toLowerCase();
-  const c=document.getElementById("classFilter").value.toLowerCase();
-  const s=document.getElementById("subjectFilter").value.toLowerCase();
-  const t=document.getElementById("typeFilter").value.toLowerCase();
-  const y=document.getElementById("yearFilter").value.toLowerCase();
-  const ch=document.getElementById("chapterFilter").value.toLowerCase();
-  return allResources.filter(r=>{
-    const search=[title(r),examCategory(r),examName(r),board(r),classLevel(r),subject(r),materialType(r),year(r),chapter(r),body(r)].join(" ").toLowerCase();
-    return (!q||search.includes(q)) &&
-      (!category||examCategory(r).toLowerCase()===category) &&
-      (!exam||examName(r).toLowerCase()===exam) &&
-      (!b||board(r).toLowerCase()===b) &&
-      (!c||classLevel(r).toLowerCase()===c) &&
-      (!s||subject(r).toLowerCase()===s) &&
-      (!t||materialType(r).toLowerCase()===t) &&
-      (!y||year(r).toLowerCase()===y) &&
-      (!ch||chapter(r).toLowerCase()===ch);
-  });
-}
-
-function openExam(name){
-  const rows=resourcesForExam(name);
-
-  modalTitle.textContent=name+" Library";
-  modalCount.textContent=rows.length;
-
-  const sections=[
-    ["📘","Syllabus"],["📊","Exam Pattern"],["📝","PYQs"],
-    ["✅","PYQ Solutions"],["📚","Notes"],["🎯","Important Questions"],
-    ["📄","Practice Sets"],["🧾","Sample Papers"],
-    ["🔢","Chapter-wise Questions"],["📈","Previous Year Analysis"],
-    ["📖","Other Resources"]
-  ];
-
-  if(!rows.length){
-    modalResources.innerHTML=`
-      <div class="library-empty">
-        <div class="empty-icon">📚</div>
-        <h3>0 Content Available</h3>
-        <p>${esc(name)} ke liye abhi koi material publish nahi hua hai.</p>
-        <div class="ready-sections">
-          ${sections.map(([icon,type])=>`<span>${icon} ${esc(type)}</span>`).join("")}
-        </div>
-      </div>`;
-  }else{
-    const grouped={};
-    rows.slice(0,100).forEach(r=>{
-      const raw=materialType(r)||"Other Resources";
-      const match=sections.find(([_,type])=>type.toLowerCase()===raw.toLowerCase());
-      const key=match ? match[1] : raw;
-      (grouped[key] ||= []).push(r);
-    });
-
-    modalResources.innerHTML=`
-      <div class="modal-library-head">
-        <p>Choose a material category inside <strong>${esc(name)}</strong>.</p>
-        <div class="ready-sections">
-          ${sections.map(([icon,type])=>`<button type="button" class="section-pill" data-type="${esc(type)}">${icon} ${esc(type)}</button>`).join("")}
-        </div>
-      </div>
-      ${sections.map(([icon,type])=>{
-        const list=grouped[type]||[];
-        return `<section class="category-block" data-category="${esc(type)}">
-          <div class="category-title"><span>${icon}</span><b>${esc(type)}</b><small>${list.length}</small></div>
-          ${list.length
-            ? `<div class="category-items">${list.map(r=>`<a class="mini" href="resource.html?id=${encodeURIComponent(r.id)}"><b>${esc(title(r))}</b><br><small>${esc(subject(r))}${chapter(r)?` • ${esc(chapter(r))}`:""}</small></a>`).join("")}</div>`
-            : `<div class="category-empty">No content yet.</div>`}
-        </section>`;
-      }).join("")}`;
-
-    modalResources.querySelectorAll(".section-pill").forEach(btn=>{
-      btn.addEventListener("click",()=>{
-        const target=modalResources.querySelector(`[data-category="${CSS.escape(btn.dataset.type)}"]`);
-        if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
-      });
-    });
-  }
-
-  examModal.classList.add("open");
-  examModal.setAttribute("aria-hidden","false");
-  document.body.style.overflow="hidden";
-}
-
-function closeExam(){examModal.classList.remove("open");examModal.setAttribute("aria-hidden","true");document.body.style.overflow="";}
-
-function setupFilters(){
-  fillSelect("categoryFilter",allResources.map(examCategory));
-  fillSelect("examFilter",allResources.map(examName));
-  fillSelect("boardFilter",allResources.map(board));
-  fillSelect("classFilter",allResources.map(classLevel));
-  fillSelect("subjectFilter",allResources.map(subject));
-  fillSelect("typeFilter",allResources.map(materialType));
-  fillSelect("yearFilter",allResources.map(year));
-  fillSelect("chapterFilter",allResources.map(chapter));
-}
-
-async function load(){
-  try{
-    // First use the shared project config when available.
-    if(window.supabaseClient && typeof window.supabaseClient.from==="function"){
-      client=window.supabaseClient;
-    }else if(typeof supabaseClient!=="undefined" && supabaseClient && typeof supabaseClient.from==="function"){
-      client=supabaseClient;
-    }else if(window.supabase && typeof window.supabase.createClient==="function"){
-      // Fallback: this makes Student Library work even if the config file
-      // did not expose its variables to the page. The publishable key is
-      // intended for browser/client-side use.
-      const url="https://fecfemkhfkvprriiyilx.supabase.co";
-      const key="sb_publishable_kji_NvezSwfQc5PPzmMcfA_aPjMbRHE";
-      client=window.supabase.createClient(url,key);
-    }
-    if(!client) throw new Error("Supabase JavaScript library did not load. Check your internet connection or the Supabase CDN script.");
-    const {data,error}=await client.from("resources").select("*").eq("published",true).order("created_at",{ascending:false});
-    if(error) throw error;
-    allResources=data||[];
-    setupFilters(); renderExamCards(); renderResults();
-  }catch(e){
-    console.error(e);
-    publishedCount.textContent="Error";
-    examGrid.innerHTML=`<div class="error"><b>Library loading failed.</b><br><br>${esc(e.message||"Unknown error")}</div>`;
-    results.innerHTML="";
-    resultCount.textContent="Error";
-  }
-}
-
-document.getElementById("year").textContent=new Date().getFullYear();
-document.getElementById("filterBtn").addEventListener("click",()=>renderResults(filtered()));
-document.getElementById("globalSearchBtn").addEventListener("click",()=>renderResults(filtered()));
-document.getElementById("globalSearch").addEventListener("keydown",e=>{if(e.key==="Enter")renderResults(filtered())});
-document.getElementById("clearBtn").addEventListener("click",()=>{
-  ["globalSearch","categoryFilter","examFilter","boardFilter","classFilter","subjectFilter","typeFilter","yearFilter","chapterFilter"].forEach(id=>document.getElementById(id).value="");
-  renderResults();
-});
-document.getElementById("closeModal").addEventListener("click",closeExam);
-document.getElementById("backFromExam").addEventListener("click",closeExam);
-examModal.addEventListener("click",e=>{if(e.target===examModal)closeExam()});
-document.getElementById("menuBtn").addEventListener("click",()=>alert("Use the Library/Admin links from the website navigation."));
-
-EXAMS.forEach(([name])=>{
-  const b=document.createElement("button");b.className="chip";b.textContent=name;b.addEventListener("click",()=>openExam(name));
-  document.getElementById("chips").appendChild(b);
-});
-load();
-</script>
+<script src="library.js?v=20260817-3"></script>
 </body>
 </html>

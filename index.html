@@ -19,6 +19,17 @@ content="MathsEra Classes — Mathematics and Physics learning platform by Prave
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
+<script src="cms.js"></script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"EducationalOrganization",
+  "name":"MathsEra Classes",
+  "telephone":"+91 9997766625",
+  "address":{"@type":"PostalAddress","streetAddress":"Raj Vihar Colony, Old Ghas Kanta, Paper Mill Road","addressLocality":"Saharanpur","addressRegion":"Uttar Pradesh","postalCode":"247001","addressCountry":"IN"},
+  "sameAs":["https://www.instagram.com/mathsera_classes","https://www.youtube.com/@MathsEraClasses","https://www.facebook.com/share/1E5piaX4Sb/","https://t.me/MathsEraClasses"]
+}
+</script>
 </head>
 
 <body>
@@ -55,6 +66,7 @@ content="MathsEra Classes — Mathematics and Physics learning platform by Prave
 
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <a href="contact.html#social">Connect</a>
 
       <a class="admin-link" href="admin.html">
         🔐 Admin Login
@@ -109,30 +121,7 @@ content="MathsEra Classes — Mathematics and Physics learning platform by Prave
       📞 Contact Us
     </a>
 
-    <a
-      href="https://www.instagram.com/mathsera_classes/"
-      target="_blank"
-      rel="noopener">
-      📸 Instagram
-    </a>
-
-    <a
-      href="https://www.youtube.com/@MathsEraClasses"
-      target="_blank"
-      rel="noopener">
-      ▶️ YouTube
-    </a>
-
-    <a
-      href="https://wa.me/919997766625"
-      target="_blank"
-      rel="noopener">
-      💬 WhatsApp
-    </a>
-
-    <a href="mailto:mathseraclasses2025@gmail.com">
-      📧 Email
-    </a>
+    <div id="mathseraMobileConnect" aria-label="MathsEra Classes social links"></div>
 
     <a class="admin-link" href="admin.html">
       🔐 Admin Login
@@ -213,19 +202,21 @@ content="MathsEra Classes — Mathematics and Physics learning platform by Prave
     </div>
 
 
-    <!-- HERO POSTER SLIDER -->
+    <!-- HERO LOGO -->
 
-<div class="hero-logo">
+    <div class="hero-logo">
 
-    <div class="hero-poster-slider" id="heroPosterSlider">
+      <div class="logo-frame">
 
-        <div class="hero-poster-loading">
-            Loading...
-        </div>
+        <img
+          src="https://fecfemkhfkvprriiyilx.supabase.co/storage/v1/object/public/solution-images/mathsera-logo.png"
+          alt="MathsEra Classes logo">
+
+      </div>
 
     </div>
 
-</div>
+  </div>
 
 </section>
 
@@ -262,6 +253,11 @@ content="MathsEra Classes — Mathematics and Physics learning platform by Prave
 </section>
 
 
+
+<!-- ================= HOMEPAGE BANNER CAROUSEL ================= -->
+<section id="homePosterTop" class="me-poster-section" hidden>
+  <div class="container"><div class="me-poster-carousel" data-placement="homepage-top"></div></div>
+</section>
 
 <!-- ================= MATHEMATICS ================= -->
 
@@ -984,6 +980,17 @@ content="MathsEra Classes — Mathematics and Physics learning platform by Prave
 
 
 
+<!-- ================= SOCIAL / CONTACT ================= -->
+<section id="social" class="social-section">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="eyebrow blue">STAY CONNECTED</div><h2>Stay Connected with MathsEra Classes</h2></div>
+      <p>Notes, Solutions, Board Preparation, Maths Tips & New Classes ke latest updates ke liye MathsEra Classes se connected rahen.</p>
+    </div>
+    <div id="mathseraSocialGrid" class="social-grid" aria-label="MathsEra Classes official social links"></div>
+  </div>
+</section>
+
 <!-- ================= CTA ================= -->
 
 <section class="cta">
@@ -1017,9 +1024,89 @@ content="MathsEra Classes — Mathematics and Physics learning platform by Prave
 </section>
 
 
+
+
+
+<!-- ================= RESULTS-AREA BANNER CAROUSEL ================= -->
+<section id="homePosterResults" class="me-poster-section" hidden>
+  <div class="container">
+    <div class="me-poster-carousel" data-placement="homepage-results"></div>
+  </div>
+</section>
+
+<!-- ================= LIVE RESULTS / ACHIEVERS ================= -->
+<section class="v10-results container" aria-labelledby="homeResultsTitle">
+  <div class="section-head v10-results-head">
+    <div>
+      <span class="v10-results-kicker">RESULTS & ACHIEVERS</span>
+      <h2 id="homeResultsTitle">Our Students, Our Pride</h2>
+      <p>Published achievements from MathsEra Classes.</p>
+    </div>
+    <a class="v10-results-link" href="results.html">View All Results →</a>
+  </div>
+  <div id="homeResults" class="v10-results-grid">
+    <div class="v10-results-empty">Loading published achievements…</div>
+  </div>
+</section>
+<script>
+(async function loadHomeResults(){
+  const el=document.getElementById('homeResults');
+  try{
+    if(!window.mathseraCMS) throw new Error('Public CMS reader unavailable');
+    const rows=await window.mathseraCMS.published('achievements');
+    const items=rows.slice(0,6);
+    el.innerHTML=items.length ? items.map(x=>`
+      <article class="v10-result-card">
+        ${x.photo_url?`<img src="${window.mathseraCMS.esc(x.photo_url)}" alt="${window.mathseraCMS.esc(x.student_name||'Student')}" loading="lazy">`:''}
+        <div class="v10-result-body">
+          <span class="v10-result-year">${window.mathseraCMS.esc(x.year||'Achievement')}</span>
+          <h3>${window.mathseraCMS.esc(x.student_name||'Student')}</h3>
+          <p>${window.mathseraCMS.esc(x.class_name||'')} ${x.exam?`· ${window.mathseraCMS.esc(x.exam)}`:''}</p>
+          ${x.marks||x.percentage?`<strong>${window.mathseraCMS.esc(x.marks||x.percentage)}</strong>`:''}
+          ${x.achievement?`<small>${window.mathseraCMS.esc(x.achievement)}</small>`:''}
+        </div>
+      </article>`).join('') : '<div class="v10-results-empty">No published achievements yet.</div>';
+  }catch(err){
+    console.error('MathsEra public achievements load failed:',err);
+    el.innerHTML='<div class="v10-results-empty">Results are temporarily unavailable. Please open the Results page and try again.</div>';
+  }
+})();
+</script>
+<style>
+.v10-results{margin:34px auto 10px}.v10-results-head{align-items:center}.v10-results-head h2{margin:5px 0 4px}.v10-results-head p{margin:0;color:#65758c}.v10-results-kicker{font-size:12px;font-weight:800;letter-spacing:.12em;color:#1683ff}.v10-results-link{font-weight:800;text-decoration:none}.v10-results-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.v10-result-card{overflow:hidden;background:#fff;border:1px solid #e1e8f1;border-radius:18px;box-shadow:0 8px 24px #0a234010}.v10-result-card img{width:100%;height:210px;object-fit:cover;display:block}.v10-result-body{padding:16px;text-align:center}.v10-result-year{display:inline-block;font-size:12px;font-weight:800;color:#1683ff}.v10-result-body h3{margin:7px 0 4px}.v10-result-body p{margin:0 0 8px;color:#65758c}.v10-result-body strong{display:block;font-size:18px}.v10-result-body small{display:block;margin-top:7px;color:#65758c;line-height:1.5}.v10-results-empty{padding:24px;background:#fff;border:1px dashed #cbd6e4;border-radius:16px;color:#65758c;text-align:center;grid-column:1/-1}@media(max-width:800px){.v10-results-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.v10-results-head{align-items:flex-start}.v10-results-grid{grid-template-columns:1fr}.v10-result-card img{height:240px}}
+</style>
+
+<section class="v10-quick container" style="margin:30px auto 10px">
+  <div class="section-head"><h2>MathsEra Quick Access</h2><span class="count">Everything students need in one place</span></div>
+  <div class="v10-qgrid">
+    <a href="courses.html">🎓<b>Courses</b><small>Explore courses</small></a>
+    <a href="batches.html">🗓️<b>Batches</b><small>Timings & starts</small></a>
+    <a href="fees.html">💰<b>Fees</b><small>Fee structure</small></a>
+    <a href="results.html">🏆<b>Results</b><small>Our achievers</small></a>
+    <a href="events.html">🎯<b>Events</b><small>Competitions & hunts</small></a>
+    <a href="posters.html">📢<b>Posters</b><small>Latest promotions</small></a>
+  </div>
+</section>
+<style>
+.v10-quick{padding:0 0 15px}.v10-qgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.v10-qgrid a{background:#fff;border:1px solid #e1e8f1;border-radius:15px;padding:15px 10px;text-align:center;box-shadow:0 7px 20px #0a234010}.v10-qgrid a:hover{border-color:#1683ff;transform:translateY(-2px)}.v10-qgrid b,.v10-qgrid small{display:block}.v10-qgrid b{margin-top:6px}.v10-qgrid small{color:#65758c;margin-top:3px}@media(max-width:900px){.v10-qgrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:500px){.v10-qgrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+
+<!-- ================= AFTER-QUICK BANNER CAROUSEL ================= -->
+<section id="homePosterAfterQuick" class="me-poster-section" hidden>
+  <div class="container">
+    <div class="me-poster-carousel" data-placement="homepage-after-quick"></div>
+  </div>
+</section>
 </main>
 
 
+
+<!-- ================= BOTTOM BANNER CAROUSEL ================= -->
+<section id="homePosterBottom" class="me-poster-section" hidden>
+  <div class="container">
+    <div class="me-poster-carousel" data-placement="homepage-bottom"></div>
+  </div>
+</section>
 
 <!-- ================= FOOTER ================= -->
 
@@ -1105,6 +1192,12 @@ content="MathsEra Classes — Mathematics and Physics learning platform by Prave
       <a href="admin.html">
         🔐 Admin Login
       </a>
+
+      <div class="footer-social" id="mathseraFooterSocial" aria-label="MathsEra Classes social links"></div>
+      <p style="margin-top:14px">
+        <a href="tel:+919997766625">📞 +91 9997766625</a><br>
+        <a href="https://maps.app.goo.gl/axznA1kYJtYqS7MT6" target="_blank" rel="noopener noreferrer">📍 Raj Vihar Colony, Saharanpur, Uttar Pradesh</a>
+      </p>
 
     </div>
 
@@ -1552,7 +1645,107 @@ content="MathsEra Classes — Mathematics and Physics learning platform by Prave
 
 
 <!-- EXISTING APP JS -->
+<script src="social-config.js"></script>
+<script src="social.js"></script>
 <script src="app.js"></script>
+
+<div id="mathseraQuickActions" class="quick-actions" aria-label="Quick contact actions"></div>
+
+<!-- ================= MATHSERA PUBLISHED BANNER ENGINE ================= -->
+<style>
+.me-poster-section{padding:18px 0 8px}
+.me-poster-carousel{position:relative;width:100%;border-radius:22px;overflow:hidden;background:#fff;border:1px solid #e1e8f1;box-shadow:0 12px 35px rgba(8,27,61,.10)}
+.me-poster-viewport{overflow:hidden;touch-action:pan-y}
+.me-poster-track{display:flex;transition:transform .42s cubic-bezier(.22,.61,.36,1);will-change:transform}
+.me-poster-slide{flex:0 0 100%;min-width:100%;position:relative}
+.me-poster-slide picture,.me-poster-slide img{display:block;width:100%}
+.me-poster-slide img{aspect-ratio:8/3;object-fit:cover;background:#edf2f8}
+.me-poster-content{padding:14px 16px 16px;background:#fff}
+.me-poster-content h3{margin:0 0 5px;font-family:Poppins;font-size:18px}
+.me-poster-content p{margin:0;color:#65758c;font-size:12px;line-height:1.55}
+.me-poster-content .me-poster-btn{display:inline-flex;margin-top:10px;padding:9px 13px;border-radius:10px;background:#1683ff;color:#fff;font-size:12px;font-weight:800}
+.me-poster-nav{position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:space-between;padding:0 10px}
+.me-poster-nav button{pointer-events:auto;width:38px;height:38px;border:0;border-radius:50%;background:rgba(6,21,47,.72);color:#fff;font-size:21px;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.me-poster-dots{display:flex;justify-content:center;gap:6px;padding:10px;background:#fff}
+.me-poster-dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:#cbd6e4;cursor:pointer}
+.me-poster-dot.active{width:20px;border-radius:999px;background:#1683ff}
+.me-poster-badge{position:absolute;top:12px;left:12px;background:rgba(6,21,47,.78);color:#fff;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:800;z-index:2}
+@media(max-width:700px){
+  .me-poster-section{padding:12px 0 5px}
+  .me-poster-carousel{border-radius:16px}
+  .me-poster-slide img{aspect-ratio:8/5}
+  .me-poster-content{padding:11px 13px 13px}
+  .me-poster-content h3{font-size:15px}
+  .me-poster-nav button{width:34px;height:34px;font-size:18px}
+}
+</style>
+<script>
+(async function initMathsEraPosterCarousels(){
+  const slots=[...document.querySelectorAll(".me-poster-carousel")];
+  if(!slots.length || !window.mathseraCMS)return;
+  const sectionMap={
+    "homepage-top":"homePosterTop",
+    "homepage-results":"homePosterResults",
+    "homepage-after-quick":"homePosterAfterQuick",
+    "homepage-bottom":"homePosterBottom"
+  };
+  const safeHref=(value)=>{
+    const v=String(value||"").trim();
+    if(!v)return "";
+    try{
+      const u=new URL(v,location.href);
+      return /^(https?:|mailto:|tel:)$/.test(u.protocol)?u.href:"";
+    }catch(_){return "";}
+  };
+  try{
+    const rows=await window.mathseraCMS.published("posters");
+    const parsed=rows.map((row,i)=>({...row,__meta:window.mathseraCMS.posterMeta(row),__i:i}));
+    for(const slot of slots){
+      const placement=slot.dataset.placement;
+      const items=parsed
+        .filter(x=>x.__meta.placement===placement || (x.__meta.placement==="all-home" && placement.startsWith("homepage-")))
+        .sort((a,b)=>(a.__meta.order-b.__meta.order)||((a.created_at||"")<(b.created_at||"")?1:-1));
+      if(!items.length)continue;
+      const section=document.getElementById(sectionMap[placement]);
+      if(section)section.hidden=false;
+      const id="mePoster_"+Math.random().toString(36).slice(2);
+      slot.innerHTML=`<div class="me-poster-viewport" id="${id}vp">
+        <div class="me-poster-track"></div>
+        <div class="me-poster-nav"><button type="button" class="prev" aria-label="Previous banner">‹</button><button type="button" class="next" aria-label="Next banner">›</button></div>
+      </div><div class="me-poster-dots"></div>`;
+      const track=slot.querySelector(".me-poster-track"),dots=slot.querySelector(".me-poster-dots");
+      track.innerHTML=items.map((x,i)=>{
+        const m=x.__meta, mobile=String(m.mobileImage||"").trim(), href=safeHref(x.button_url);
+        return `<article class="me-poster-slide">
+          <span class="me-poster-badge">${i+1} / ${items.length}</span>
+          <picture>${mobile?`<source media="(max-width: 700px)" srcset="${window.mathseraCMS.esc(mobile)}">`:''}
+            <img src="${window.mathseraCMS.esc(x.image_url||'')}" alt="${window.mathseraCMS.esc(x.title||'MathsEra banner')}" loading="${i?'lazy':'eager'}">
+          </picture>
+          ${m.text||href?`<div class="me-poster-content"><h3>${window.mathseraCMS.esc(x.title||"MathsEra Classes")}</h3>${m.text?`<p>${window.mathseraCMS.esc(m.text)}</p>`:''}${href?`<a class="me-poster-btn" href="${window.mathseraCMS.esc(href)}" target="_blank" rel="noopener">${window.mathseraCMS.esc(x.button_text||"View Details")} →</a>`:''}</div>`:''}
+        </article>`;
+      }).join("");
+      dots.innerHTML=items.map((_,i)=>`<button class="me-poster-dot ${i===0?'active':''}" data-i="${i}" aria-label="Go to banner ${i+1}"></button>`).join("");
+      let index=0,startX=0,startY=0,drag=false,timer=null;
+      const go=(n)=>{
+        index=(n+items.length)%items.length;
+        track.style.transform=`translate3d(${-index*100}%,0,0)`;
+        dots.querySelectorAll(".me-poster-dot").forEach((d,i)=>d.classList.toggle("active",i===index));
+      };
+      slot.querySelector(".prev").onclick=()=>go(index-1);
+      slot.querySelector(".next").onclick=()=>go(index+1);
+      dots.querySelectorAll(".me-poster-dot").forEach(d=>d.onclick=()=>go(Number(d.dataset.i)));
+      const start=()=>{clearInterval(timer);const secs=Math.max(2.5,(Number(items[index]?.__meta.duration)||5000)/1000);if(items.length>1&&items[index]?.__meta.auto!==false)timer=setInterval(()=>go(index+1),secs*1000);};
+      const restart=()=>{start();};
+      const vp=slot.querySelector(".me-poster-viewport");
+      vp.addEventListener("touchstart",e=>{const t=e.changedTouches[0];startX=t.clientX;startY=t.clientY;drag=true;clearInterval(timer)},{passive:true});
+      vp.addEventListener("touchend",e=>{if(!drag)return;drag=false;const t=e.changedTouches[0],dx=t.clientX-startX,dy=t.clientY-startY;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.2)go(index+(dx<0?1:-1));restart()},{passive:true});
+      vp.addEventListener("mouseenter",()=>clearInterval(timer));vp.addEventListener("mouseleave",restart);
+      go(0);start();
+      if(items.length<=1){slot.querySelector(".me-poster-nav").style.display="none";dots.style.display="none";}
+    }
+  }catch(err){console.error("MathsEra poster carousel failed:",err);}
+})();
+</script>
 
 </body>
 </html>
