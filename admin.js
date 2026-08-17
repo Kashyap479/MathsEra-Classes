@@ -154,7 +154,7 @@ function render(rows){
         <div class="item-meta">${safe(r.category)}${g.examName?" • "+safe(g.examName):""} • ${safe(r.content_type||"Resource")}</div>
         <div class="item-meta">${r.class_name?"Class/Level "+safe(r.class_name)+" • ":""}${safe(r.board)}${r.chapter?" • "+safe(r.chapter):""}</div>
         <div class="item-meta">${g.images?.length||0} image(s)${r.pdf_url?" • PDF attached":""}</div>
-        <a href="resource.html?id=${encodeURIComponent(r.id)}">VIEW MATERIAL →</a>
+        <a href="resource.html?id=${encodeURIComponent(r.id)}">VIEW MATERIAL</a> <button type="button" class="delete-resource-btn" onclick="deleteResource('${r.id}')">DELETE</button>
       </div>
     </div>`
   }).join("");
@@ -175,4 +175,207 @@ async function init(){
   const {data}=await c.auth.getSession();if(data?.session)showDashboard();else showLogin();
 }
 init();
+})();
+async function deleteResource(id){
+  const c=client();
+  if(!c){alert("Supabase client nahi mila.");return;}
+  if(!confirm("Kya aap is material ko permanently delete karna chahte hain?")) return;
+  try{
+    const {data:r,error:readError}=await c.from("resources").select("body,image_url,pdf_url").eq("id",id).single();
+    if(readError) throw readError;
+
+    const urls=[];
+    if(r?.image_url) urls.push(r.image_url);
+    if(r?.pdf_url) urls.push(r.pdf_url);
+
+    try{
+      const g=JSON.parse(r?.body||"{}");
+      if(Array.isArray(g?.images)) urls.push(...g.images);
+    }catch(e){}
+
+    const marker="/storage/v1/object/public/library-files/";
+    const paths=[...new Set(urls.map(u=>{
+      try{
+        const s=String(u||"");
+        const i=s.indexOf(marker);
+        if(i<0) return null;
+        return decodeURIComponent(s.slice(i+marker.length).split("?")[0]);
+      }catch(e){return null;}
+    }).filter(Boolean))];
+
+    if(paths.length){
+      const {error:storageError}=await c.storage.from("library-files").remove(paths);
+      if(storageError) throw storageError;
+    }
+
+    const {data,error}=await c.rpc("mathsera_delete_resource",{p_id:id});
+    if(error) throw error;
+    if(!data) throw new Error("Resource delete nahi hua.");
+
+    await loadResources();
+    alert("✅ Material aur uski files successfully delete ho gayi.");
+  }catch(e){
+    console.error("DELETE ERROR:",e);
+    alert("❌ Delete failed: "+(e?.message||e));
+  }
+}
+}
+
+async function cleanupOrphanFiles(){
+  const c = client();
+  if(!c){
+    alert("Supabase client nahi mila.");
+    return;
+  }
+
+  if(!confirm("Unlinked/orphan storage files ko permanently delete karna hai?")) return;
+
+  try{
+    const {data: resources, error} = await c
+      .from("resources")
+      .select("image_url,pdf_url,body");
+
+    if(error) throw error;
+
+    const referenced = new Set();
+
+    function addUrl(url){
+      if(!url) return;
+
+      const marker = "/storage/v1/object/public/library-files/";
+      const s = String(url);
+      const i = s.indexOf(marker);
+
+      if(i >= 0){
+        const path = decodeURIComponent(
+          s.slice(i + marker.length).split("?")[0]
+        );
+        if(path) referenced.add(path);
+      }
+    }
+
+    for(const r of (resources || [])){
+      addUrl(r.image_url);
+      addUrl(r.pdf_url);
+
+      try{
+        const body =
+          typeof r.body === "string"
+            ? JSON.parse(r.body || "{}")
+            : (r.body || {});
+
+        if(Array.isArray(body.images)){
+          body.images.forEach(addUrl);
+        }
+      }catch(e){}
+    }
+
+    const bucket = c.storage.from("library-files");
+    const files = [];
+
+    async function scan(folder=""){
+      const {data, error} = await bucket.list(folder,{
+        limit:1000,
+        offset:0
+      });
+
+      if(error) throw error;
+
+      for(const item of (data || [])){
+        const path = folder
+          ? `${folder}/${item.name}`
+          : item.name;
+
+        if(item.id){
+          files.push(path);
+        }else{
+          await scan(path);
+        }
+      }
+    }
+
+    await scan("");
+
+    const orphanFiles = files.filter(
+      path => !referenced.has(path)
+    );
+
+    console.log("Referenced files:", referenced.size);
+    console.log("Storage files:", files.length);
+    console.log("Orphan files:", orphanFiles);
+
+    if(!orphanFiles.length){
+      alert("✅ No orphan files found.");
+      return;
+    }
+
+    if(!confirm(
+      `Found ${orphanFiles.length} orphan file(s).\n\nDelete ONLY these files?`
+    )) return;
+
+    const {error: deleteError} =
+      await bucket.remove(orphanFiles);
+
+    if(deleteError) throw deleteError;
+
+    alert(
+      `✅ Cleanup complete!\n\nDeleted: ${orphanFiles.length} file(s).`
+    );
+
+    await loadResources();
+
+  }catch(e){
+    console.error("ORPHAN CLEANUP ERROR:",e);
+    alert("❌ Cleanup failed: " + (e?.message || e));
+  }
+}
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const headings = [...document.querySelectorAll("h2,h3")];
+  const heading = headings.find(
+    el => el.textContent.trim() === "Recently Published Material"
+  );
+
+  if(!heading || document.getElementById("cleanup-orphans-btn")) return;
+
+  const btn = document.createElement("button");
+  btn.id = "cleanup-orphans-btn";
+  btn.type = "button";
+  btn.textContent = "🧹 CLEAN ORPHAN FILES";
+  btn.style.cssText =
+    "margin:12px 0;padding:10px 16px;border:0;border-radius:7px;" +
+    "background:#dc2626;color:#fff;font-weight:700;cursor:pointer;";
+
+  btn.onclick = cleanupOrphanFiles;
+
+  heading.parentElement.appendChild(btn);
+});
+
+(function(){
+  function addCleanupOrphanButton(){
+    const headings = [...document.querySelectorAll("h2,h3")];
+    const heading = headings.find(
+      el => el.textContent.trim() === "Recently Published Material"
+    );
+
+    if(!heading || document.getElementById("cleanup-orphans-btn")) return;
+
+    const btn = document.createElement("button");
+    btn.id = "cleanup-orphans-btn";
+    btn.type = "button";
+    btn.textContent = "🧹 CLEAN ORPHAN FILES";
+    btn.style.cssText =
+      "margin:12px 0;padding:10px 16px;border:0;border-radius:7px;" +
+      "background:#dc2626;color:#fff;font-weight:700;cursor:pointer;";
+
+    btn.onclick = cleanupOrphanFiles;
+    heading.parentElement.appendChild(btn);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", addCleanupOrphanButton);
+  }else{
+    addCleanupOrphanButton();
+  }
 })();
